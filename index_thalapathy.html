@@ -1,0 +1,4154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THALAPATHY — A Cinematic Tribute Experience | Vijay (1992–2026)</title>
+  <meta name="description" content="Fullscreen cinematic scroll-driven tribute website honoring Thalapathy Vijay — Indian actor, Tamil cinema box office phenomenon, and Chief Minister of Tamil Nadu.">
+  <meta name="keywords" content="Thalapathy Vijay, Vijay, TVK, Tamilaga Vettri Kazhagam, Jana Nayagan, Leo, Ghilli, Thuppakki, Tamil Cinema, Indian Chief Minister">
+  <meta name="author" content="Cinematic Fan Tribute">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <style>
+/* ==========================================================================
+   THALAPATHY — Dark Luxury Design Tokens & Base System
+   ========================================================================== */
+
+:root {
+  /* Color Palette - Dark Velvet & Metallic Gold */
+  --bg-primary: #08090C;
+  --bg-secondary: #0E1017;
+  --bg-card: rgba(18, 21, 31, 0.65);
+  --bg-glass: rgba(255, 255, 255, 0.03);
+
+  --accent-gold: #D4AF37;
+  --accent-gold-bright: #F5D061;
+  --accent-gold-glow: rgba(212, 175, 55, 0.35);
+  --accent-amber: #E58E26;
+  --accent-crimson: #C0392B;
+  --accent-cyan: #00D2FF;
+
+  --text-primary: #F8F9FA;
+  --text-secondary: #A0A5B5;
+  --text-muted: #62687A;
+  --text-gold: #F5D061;
+
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-gold: rgba(212, 175, 55, 0.3);
+  --border-glass: rgba(255, 255, 255, 0.12);
+
+  /* Fonts */
+  --font-display: 'Cinzel', 'Playfair Display', Georgia, serif;
+  --font-heading: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Space Grotesk', monospace;
+
+  /* Transitions & Animation Timing */
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Spacing & Heights */
+  --nav-height: 80px;
+  --container-max: 1380px;
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-body);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  color-scheme: dark;
+  scroll-behavior: initial; /* Lenis handles smooth scroll */
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(212, 175, 55, 0.4);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-gold-bright);
+}
+
+/* Typography Hierarchy */
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.text-gold {
+  color: var(--accent-gold-bright);
+  background: linear-gradient(135deg, #FFF 0%, #F5D061 50%, #D4AF37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.title-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.text-gradient-subtle {
+  background: linear-gradient(180deg, #FFFFFF 0%, #A0A5B5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Custom Animated Cursor */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  background-color: var(--accent-gold-bright);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, transform 0.1s ease;
+  box-shadow: 0 0 15px var(--accent-gold-glow);
+}
+
+.custom-cursor-follower {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+}
+
+body.cursor-hover .custom-cursor {
+  width: 24px;
+  height: 24px;
+  background-color: var(--accent-gold);
+  opacity: 0.8;
+}
+
+body.cursor-hover .custom-cursor-follower {
+  transform: translate(-50%, -50%) scale(1.6);
+  border-color: var(--accent-gold-bright);
+}
+
+/* Glassmorphism Panels */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.glass-panel:hover {
+  border-color: var(--border-gold);
+  box-shadow: 0 25px 60px rgba(212, 175, 55, 0.12);
+}
+
+/* Glow Background Effects */
+.bg-ambient-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  opacity: 0.15;
+  z-index: 0;
+}
+
+/* Section Common Structure */
+.section {
+  position: relative;
+  width: 100%;
+  padding: 8rem 0;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.section-pinned {
+  min-height: 100vh;
+}
+
+.section-header {
+  margin-bottom: 4rem;
+  text-align: center;
+}
+
+.section-tagline {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent-gold-bright);
+  margin-bottom: 0.75rem;
+  padding: 0.25rem 1rem;
+  border: 1px solid var(--border-gold);
+  border-radius: 30px;
+  background: rgba(212, 175, 55, 0.05);
+}
+
+.section-title {
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.section-description {
+  max-width: 650px;
+  margin: 0 auto;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+/* Magnetic Button Utility */
+.btn-magnetic {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.1rem 2.2rem;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(14, 16, 23, 0.9) 100%);
+  border: 1px solid var(--accent-gold);
+  border-radius: 40px;
+  cursor: pointer;
+  overflow: hidden;
+  text-decoration: none;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.btn-magnetic::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transition: left 0.6s ease;
+}
+
+.btn-magnetic:hover::before {
+  left: 100%;
+}
+
+.btn-magnetic:hover {
+  border-color: var(--accent-gold-bright);
+  box-shadow: 0 15px 40px var(--accent-gold-glow);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+}
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.05);
+}
+
+/* Keyboard focus rings for accessibility */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--accent-gold-bright);
+  outline-offset: 4px;
+}
+
+/* Reduced Motion Mode Support */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .custom-cursor, .custom-cursor-follower {
+    display: none !important;
+  }
+}
+
+
+/* ==========================================================================
+   THALAPATHY — Component Layouts & Interactive Widgets
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. LOADER SCREEN
+   -------------------------------------------------------------------------- */
+#loader-screen {
+  position: fixed;
+  inset: 0;
+  background-color: var(--bg-primary);
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s ease;
+}
+
+#loader-screen.loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loader-content {
+  text-align: center;
+}
+
+.loader-logo {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  letter-spacing: 0.2em;
+  font-weight: 700;
+  color: var(--accent-gold-bright);
+  margin-bottom: 2rem;
+  text-shadow: 0 0 30px var(--accent-gold-glow);
+}
+
+.loader-bar-container {
+  width: 280px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 0 auto 1.5rem auto;
+  position: relative;
+}
+
+.loader-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent-gold), var(--accent-gold-bright));
+  transition: width 0.1s linear;
+  box-shadow: 0 0 15px var(--accent-gold-bright);
+}
+
+.loader-percentage {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.1em;
+}
+
+/* --------------------------------------------------------------------------
+   2. NAVBAR & SIDE PROGRESS RAIL
+   -------------------------------------------------------------------------- */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--nav-height);
+  padding: 0 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+  transition: background 0.4s ease, backdrop-filter 0.4s ease, border-color 0.4s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.navbar.scrolled {
+  background: rgba(8, 9, 12, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom-color: var(--border-subtle);
+}
+
+.nav-brand {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--text-primary);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-brand span {
+  color: var(--accent-gold-bright);
+}
+
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.audio-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 1.2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  border-radius: 30px;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.audio-toggle-btn:hover, .audio-toggle-btn.active {
+  color: var(--accent-gold-bright);
+  border-color: var(--accent-gold);
+  background: rgba(212, 175, 55, 0.1);
+}
+
+.audio-icon-waves {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 14px;
+}
+
+.audio-bar {
+  width: 2px;
+  height: 4px;
+  background-color: currentColor;
+  border-radius: 1px;
+}
+
+.audio-toggle-btn.playing .audio-bar {
+  animation: soundWave 0.8s ease-in-out infinite alternate;
+}
+.audio-toggle-btn.playing .audio-bar:nth-child(2) { animation-delay: 0.2s; }
+.audio-toggle-btn.playing .audio-bar:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes soundWave {
+  0% { height: 4px; }
+  100% { height: 14px; }
+}
+
+/* Side Progress Rail (9 Sections) */
+.side-progress-rail {
+  position: fixed;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.rail-dot {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.rail-dot::after {
+  content: attr(data-label);
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.25rem 0.75rem;
+  background: rgba(14, 16, 23, 0.9);
+  border: 1px solid var(--border-gold);
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-primary);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.rail-dot:hover::after {
+  opacity: 1;
+  transform: translateY(-50%) translateX(-4px);
+}
+
+.rail-dot.active {
+  background: var(--accent-gold-bright);
+  box-shadow: 0 0 12px var(--accent-gold-bright);
+  transform: scale(1.3);
+}
+
+/* --------------------------------------------------------------------------
+   3. HERO SECTION
+   -------------------------------------------------------------------------- */
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 2rem;
+  padding-top: var(--nav-height);
+  overflow: hidden;
+}
+
+.hero-bg-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 1;
+  filter: brightness(1.05) contrast(1.02);
+  z-index: 0;
+}
+
+.hero-bg-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  opacity: 0.9;
+  z-index: 0;
+}
+
+.hero-overlay-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(8, 9, 12, 0.35) 0%, rgba(8, 9, 12, 0) 45%, rgba(8, 9, 12, 0.9) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  max-width: 1050px;
+  padding: 0 1.5rem;
+  margin-bottom: 2rem;
+  background: none;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--accent-gold-bright);
+  margin-bottom: 0.75rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95);
+}
+
+.hero-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 0.92;
+  margin-bottom: 0.75rem;
+}
+
+.hero-title-prefix {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 3.2vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: 0.45em;
+  color: #F8F9FA;
+  text-transform: uppercase;
+  margin-bottom: 0.2rem;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.95), 0 2px 4px rgba(0, 0, 0, 0.9);
+}
+
+.hero-title-main {
+  font-family: var(--font-heading);
+  font-size: clamp(4rem, 12vw, 8.5rem);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFF5D0 30%, #F5D061 60%, #D4AF37 85%, #997B20 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 40px rgba(212, 175, 55, 0.75)) drop-shadow(0 8px 30px rgba(0,0,0,0.98));
+}
+
+.hero-description {
+  font-size: 1.1rem;
+  color: #F3F4F6;
+  font-weight: 500;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+  text-shadow: 0 2px 15px rgba(0, 0, 0, 0.95), 0 1px 3px rgba(0, 0, 0, 0.9);
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.scroll-mouse {
+  width: 22px;
+  height: 36px;
+  border: 2px solid var(--border-gold);
+  border-radius: 12px;
+  position: relative;
+}
+
+.scroll-wheel {
+  width: 3px;
+  height: 8px;
+  background-color: var(--accent-gold-bright);
+  border-radius: 2px;
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: mouseScroll 1.8s ease-in-out infinite;
+}
+
+@keyframes mouseScroll {
+  0% { transform: translate(-50%, 0); opacity: 1; }
+  100% { transform: translate(-50%, 14px); opacity: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   4. ABOUT SECTION
+   -------------------------------------------------------------------------- */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.about-image-wrapper {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
+  border: 1px solid var(--border-gold);
+  aspect-ratio: 4 / 5;
+  width: 100%;
+  max-height: 600px;
+}
+
+.about-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.02);
+  display: block;
+  transition: transform 0.8s ease;
+}
+
+.about-image-wrapper:hover img {
+  transform: scale(1.06);
+}
+
+.about-experience-badge {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  padding: 1.25rem 1.75rem;
+  background: rgba(14, 16, 23, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-gold);
+  border-radius: 14px;
+  text-align: center;
+}
+
+.about-experience-badge .num {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 2.5rem;
+  color: var(--accent-gold-bright);
+  line-height: 1;
+}
+
+.about-experience-badge .lbl {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.about-bio-text p {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+}
+
+/* --------------------------------------------------------------------------
+   5. CAREER STATISTICS SECTION
+   -------------------------------------------------------------------------- */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.stat-card {
+  padding: 3rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+}
+
+.stat-number {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  color: var(--text-primary);
+  line-height: 1;
+  margin-bottom: 0.75rem;
+}
+
+.stat-label {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--accent-gold-bright);
+  margin-bottom: 0.5rem;
+}
+
+.stat-subtext {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   6. 69 MOVIES COLLECTION (FILM REEL)
+   -------------------------------------------------------------------------- */
+.film-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.film-filter-btn {
+  padding: 0.6rem 1.5rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  border-radius: 30px;
+  color: var(--text-secondary);
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.film-filter-btn.active, .film-filter-btn:hover {
+  background: rgba(212, 175, 55, 0.15);
+  border-color: var(--accent-gold);
+  color: var(--accent-gold-bright);
+}
+
+.films-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.film-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.film-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--border-gold);
+  box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
+}
+
+.film-card.highlight-card {
+  border-color: rgba(212, 175, 55, 0.4);
+}
+
+.film-poster-container {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: 210px;
+  overflow: hidden;
+  position: relative;
+  background: #08090C;
+}
+
+.film-poster-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  transition: transform 0.6s ease, filter 0.6s ease;
+}
+
+.film-card:hover .film-poster-container img {
+  transform: scale(1.08);
+  filter: brightness(1.1);
+}
+
+.film-card-body {
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  background: linear-gradient(180deg, rgba(14, 16, 23, 0.9) 0%, rgba(8, 9, 12, 0.98) 100%);
+}
+
+.modal-film-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.modal-poster-wrapper {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border-gold);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
+  background: #000;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: 260px;
+}
+
+.modal-poster-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  display: block;
+}
+
+.film-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.film-number {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent-gold-bright);
+  font-weight: 700;
+  padding: 0.15rem 0.45rem;
+  background: rgba(212, 175, 55, 0.2);
+  border: 1px solid var(--border-gold);
+  border-radius: 4px;
+}
+
+.film-year {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  padding: 0.15rem 0.5rem;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+}
+
+.film-verdict-badge {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent-gold-bright);
+  text-transform: uppercase;
+  margin-left: auto;
+}
+
+.film-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  line-height: 1.25;
+}
+
+.film-meta {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.film-card-footer {
+  margin-top: 1.25rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.film-boxoffice {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--accent-gold-bright);
+  font-weight: 700;
+}
+
+.film-note-short {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.film-expand-hint {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.film-card:hover .film-expand-hint {
+  color: var(--accent-gold-bright);
+  transform: translateX(3px);
+}
+
+/* Modal Drawer */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-card {
+  width: 100%;
+  max-width: 600px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-gold);
+  border-radius: 20px;
+  padding: 2.5rem;
+  position: relative;
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+}
+
+.modal-overlay.active .modal-card {
+  transform: scale(1);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  background: var(--accent-crimson);
+}
+
+/* --------------------------------------------------------------------------
+   7. AUDIO LAUNCH EVENTS
+   -------------------------------------------------------------------------- */
+.launches-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.launch-card {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 2.5rem;
+  padding: 2rem;
+  align-items: center;
+}
+
+.launch-thumbnail-box {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  height: 240px;
+  background: #000;
+  cursor: pointer;
+}
+
+.launch-thumbnail-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.launch-thumbnail-box:hover img {
+  transform: scale(1.05);
+}
+
+.play-glow-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(212, 175, 55, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 30px var(--accent-gold-bright);
+  transition: transform 0.3s ease;
+}
+
+.launch-thumbnail-box:hover .play-glow-ring {
+  transform: translate(-50%, -50%) scale(1.15);
+}
+
+.launch-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-gold-bright);
+  padding: 0.25rem 0.75rem;
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid var(--border-gold);
+  border-radius: 20px;
+  margin-bottom: 1rem;
+}
+
+.launch-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.launch-meta-row {
+  display: flex;
+  gap: 1.5rem;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.launch-desc {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* --------------------------------------------------------------------------
+   8. AWARDS & ACHIEVEMENTS
+   -------------------------------------------------------------------------- */
+.awards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.award-card {
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.award-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-gold);
+  box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
+}
+
+.award-image-box {
+  width: 100%;
+  height: 230px;
+  overflow: hidden;
+  position: relative;
+  background: #0E1017;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.award-image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 15%;
+  transition: transform 0.6s ease;
+}
+
+.award-card:hover .award-image-box img {
+  transform: scale(1.08);
+}
+
+.award-icon-placeholder {
+  width: 100%;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(14, 16, 23, 0.9) 100%);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.award-card-content {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.award-header-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent-gold-bright);
+  padding: 0.2rem 0.6rem;
+  background: rgba(212, 175, 55, 0.15);
+  border: 1px solid var(--border-gold);
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+.award-year-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #fff;
+  padding: 0.2rem 0.6rem;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+}
+
+.award-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.award-film {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--accent-gold-bright);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.award-org {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+/* --------------------------------------------------------------------------
+   9. POLITICAL JOURNEY
+   -------------------------------------------------------------------------- */
+.political-section {
+  position: relative;
+}
+
+.tn-map-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.timeline-spine {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.timeline-spine::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  background: linear-gradient(180deg, var(--border-subtle) 0%, var(--accent-gold) 50%, var(--border-subtle) 100%);
+}
+
+.timeline-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
+.timeline-col {
+  width: 100%;
+}
+
+.timeline-node {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--bg-primary);
+  border: 3px solid var(--accent-gold-bright);
+  box-shadow: 0 0 14px var(--accent-gold-bright);
+  z-index: 5;
+}
+
+.timeline-card {
+  padding: 2rem;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.timeline-year {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.8rem;
+  color: var(--accent-gold-bright);
+  margin-bottom: 0.5rem;
+}
+
+.timeline-media-box,
+.timeline-video-box {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  height: 280px;
+  background: #000;
+  border: 1px solid var(--border-gold);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+}
+
+.timeline-media-box video,
+.timeline-video-box video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.timeline-media-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 15%;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.timeline-media-box:hover img {
+  transform: scale(1.06);
+}
+
+.timeline-video-overlay {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  z-index: 2;
+}
+
+.timeline-video-badge {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent-gold-bright);
+  padding: 0.3rem 0.8rem;
+  background: rgba(14, 16, 23, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-gold);
+  border-radius: 20px;
+}
+
+.timeline-video-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(14, 16, 23, 0.95) 100%);
+}
+
+.timeline-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.timeline-desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   10. FAN WALL & COMMUNITY
+   -------------------------------------------------------------------------- */
+.marquee-container {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  margin-bottom: 3rem;
+  mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
+}
+
+.marquee-content {
+  display: flex;
+  gap: 2rem;
+  animation: marqueeScroll 35s linear infinite;
+  white-space: nowrap;
+}
+
+.marquee-container:hover .marquee-content {
+  animation-play-state: paused;
+}
+
+@keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.fan-card {
+  width: 360px;
+  padding: 1.75rem;
+  flex-shrink: 0;
+  white-space: normal;
+}
+
+.fan-text {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+.fan-author {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--accent-gold-bright);
+}
+
+/* --------------------------------------------------------------------------
+   MASHUP VIDEO VAULT SECTION (SINGLE FEATURED VIDEO)
+   -------------------------------------------------------------------------- */
+.single-mashup-container {
+  max-width: 980px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-gold);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 35px rgba(212, 175, 55, 0.15);
+}
+
+.single-mashup-video-box {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 500px;
+  background: #000;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.single-mashup-video-box video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.single-mashup-badge {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  z-index: 3;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent-gold-bright);
+  padding: 0.35rem 0.9rem;
+  background: rgba(14, 16, 23, 0.9);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-gold);
+  border-radius: 20px;
+  letter-spacing: 0.05em;
+}
+
+.single-mashup-controls {
+  position: absolute;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  z-index: 3;
+}
+
+.mashup-ctrl-btn {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+  background: rgba(14, 16, 23, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-gold);
+  border-radius: 30px;
+  padding: 0.5rem 1.25rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.mashup-ctrl-btn:hover {
+  transform: scale(1.05);
+  background: rgba(212, 175, 55, 0.9);
+  color: #000;
+}
+
+.single-mashup-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 2rem;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(14, 16, 23, 0.98) 100%);
+}
+
+.fallback-content .fallback-icon {
+  font-size: 3.5rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.fallback-content h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent-gold-bright);
+  margin-bottom: 0.5rem;
+}
+
+.fallback-content p {
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+}
+
+.single-mashup-info {
+  padding: 2rem 2.5rem;
+  text-align: center;
+  background: linear-gradient(180deg, rgba(14, 16, 23, 0.95) 0%, rgba(8, 9, 12, 0.99) 100%);
+}
+
+.single-mashup-title {
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.single-mashup-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--accent-gold-bright);
+}
+
+/* --------------------------------------------------------------------------
+   11. LEGACY & FOOTER
+   -------------------------------------------------------------------------- */
+.legacy-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.legacy-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.25;
+  z-index: 0;
+}
+
+.legacy-quote {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  max-width: 900px;
+  line-height: 1.4;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.site-footer {
+  padding: 4rem 0 2rem 0;
+  background: #050608;
+  border-top: 1px solid var(--border-subtle);
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.disclaimer-text {
+  max-width: 750px;
+  margin: 1.5rem auto 0 auto;
+  line-height: 1.6;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE BREAKPOINTS
+   -------------------------------------------------------------------------- */
+@media (max-width: 992px) {
+  .about-grid { grid-template-columns: 1fr; }
+  .about-image-wrapper img { height: 420px; }
+  .launch-card { grid-template-columns: 1fr; }
+  .launch-thumbnail-box { height: 220px; }
+  .timeline-spine::before { left: 20px; }
+  .timeline-item { width: 100%; left: 0 !important; text-align: left !important; padding-left: 50px; }
+  .timeline-node { left: 12px !important; }
+}
+
+@media (max-width: 600px) {
+  .navbar { padding: 0 1.5rem; }
+  .side-progress-rail { display: none; }
+  .hero-title { font-size: 2.5rem; }
+  .section { padding: 5rem 0; }
+}
+
+</style>
+</head>
+<body>
+
+  <!-- Custom Animated Cursor -->
+  <div class="custom-cursor"></div>
+  <div class="custom-cursor-follower"></div>
+
+  <!-- Interactive Loader Screen -->
+  <div id="loader-screen">
+    <div class="loader-content">
+      <div class="loader-logo">THALAPATHY</div>
+      <div class="loader-bar-container">
+        <div class="loader-bar-fill"></div>
+      </div>
+      <div class="loader-percentage">0%</div>
+    </div>
+  </div>
+
+  <!-- Transparent Frosted Header -->
+  <header class="navbar">
+    <a href="#hero" class="nav-brand">
+      THALAPATHY <span>VIJAY</span>
+    </a>
+    <div class="nav-controls">
+      <button id="audio-toggle-btn" class="audio-toggle-btn playing" aria-label="Toggle Ambient Audio">
+        <div class="audio-icon-waves">
+          <div class="audio-bar"></div>
+          <div class="audio-bar"></div>
+          <div class="audio-bar"></div>
+        </div>
+        <span class="audio-status-text">SOUND ON</span>
+      </button>
+      <a href="#about" class="btn-magnetic btn-secondary" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">JOURNEY</a>
+    </div>
+  </header>
+
+  <!-- Side Progress Rail (9 Sections) -->
+  <div class="side-progress-rail" aria-label="Section Navigation">
+    <a href="#hero" class="rail-dot active" data-target="#hero" data-label="01. Hero"></a>
+    <a href="#about" class="rail-dot" data-target="#about" data-label="02. The Icon"></a>
+    <a href="#stats" class="rail-dot" data-target="#stats" data-label="03. Career Statistics"></a>
+    <a href="#films" class="rail-dot" data-target="#films" data-label="04. 69 Movies Collection"></a>
+    <a href="#launches" class="rail-dot" data-target="#launches" data-label="05. Audio Launches"></a>
+    <a href="#awards" class="rail-dot" data-target="#awards" data-label="06. Awards & Honors"></a>
+    <a href="#political" class="rail-dot" data-target="#political" data-label="07. Political Journey"></a>
+    <a href="#fanwall" class="rail-dot" data-target="#fanwall" data-label="08. Fan Wall"></a>
+    <a href="#mashup" class="rail-dot" data-target="#mashup" data-label="09. Mashup Vault"></a>
+    <a href="#legacy" class="rail-dot" data-target="#legacy" data-label="10. Legacy"></a>
+  </div>
+
+  <main>
+    <!-- SECTION 1: HERO -->
+    <section id="hero" class="hero-section">
+      <video id="hero-bg-video" autoplay loop muted playsinline class="hero-bg-video">
+        <source src="assets/video/hero.mp4" type="video/mp4">
+      </video>
+      <div class="hero-overlay-gradient"></div>
+
+      <div class="hero-content">
+        <div class="hero-subtitle">1992 — 2026 CINEMATIC MONUMENT</div>
+        <h1 class="hero-title">
+          <span class="hero-title-prefix">THALAPATHY</span>
+          <span class="hero-title-main">VIJAY</span>
+        </h1>
+        <p class="hero-description">
+          Four decades of box office supremacy • 69 landmark feature films • Chief Minister of Tamil Nadu
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 2: ABOUT -->
+    <section id="about" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tagline">THE ICON</span>
+          <h2 class="section-title">Joseph Vijay <span class="text-gold">Chandrasekhar</span></h2>
+          <p class="section-description">
+            Born June 22, 1974 in Chennai, Vijay redefined Tamil commercial cinema through effortless charismatic screen presence, iconic dance choreography, and unmatched box office loyalty.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-image-wrapper">
+            <img src="assets/images/about.jpg?v=3" alt="Vijay Portrait">
+            <div class="about-experience-badge">
+              <div class="num">34</div>
+              <div class="lbl">Years of Glory</div>
+            </div>
+          </div>
+
+          <div class="about-bio-text">
+            <p>
+              Making his lead acting debut in 1992's <em>Naalaiya Theerpu</em> directed by his father S. A. Chandrasekhar, Vijay quickly emerged as the beloved family hero with romantic blockbusters like <em>Poove Unakkaga</em> (1996) and <em>Kadhalukku Mariyadhai</em> (1997).
+            </p>
+            <p>
+              The 2000s cemented his title as <strong>"Thalapathy"</strong> (Commander) through all-time mass blockbusters <em>Ghilli</em> (2004) — the first Tamil film to break ₹50 Crores domestically — and <em>Pokkiri</em> (2007).
+            </p>
+            <p>
+              From 2012 onwards, Vijay spearheaded modern pan-Indian cinema with <em>Thuppakki</em>, <em>Kaththi</em>, <em>Mersal</em>, <em>Master</em>, and <em>Leo</em>, establishing an unprecedented streak of 8 consecutive ₹200-Crore-plus worldwide grossers.
+            </p>
+            <div style="margin-top: 2rem;">
+              <a href="#stats" class="btn-magnetic">VIEW CAREER STATS</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: CAREER STATISTICS -->
+    <section id="stats" class="section section-pinned">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tagline">BY THE NUMBERS</span>
+          <h2 class="section-title">Box Office & Industry <span class="text-gold">Dominance</span></h2>
+          <p class="section-description">
+            Verified statistical milestones cross-checked across box office records and industry award bodies.
+          </p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="glass-panel stat-card">
+            <div class="stat-number" data-target="69" data-suffix="">0</div>
+            <div class="stat-label">Lead Feature Films</div>
+            <div class="stat-subtext">1992 – 2026 Complete Catalog</div>
+          </div>
+
+          <div class="glass-panel stat-card">
+            <div class="stat-number" data-target="8" data-suffix="">0</div>
+            <div class="stat-label">Consecutive ₹200Cr+ Hits</div>
+            <div class="stat-subtext">First South Indian Actor Record</div>
+          </div>
+
+          <div class="glass-panel stat-card">
+            <div class="stat-number" data-target="606.42" data-suffix=" Cr">₹0</div>
+            <div class="stat-label">Highest Worldwide Gross</div>
+            <div class="stat-subtext">Leo (2023 All-Time Record)</div>
+          </div>
+
+          <div class="glass-panel stat-card">
+            <div class="stat-number" data-target="29" data-suffix=" Wins">0</div>
+            <div class="stat-label">Industry Award Wins</div>
+            <div class="stat-subtext">Across 58 Total Nominations</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: 69 MOVIES COLLECTION -->
+    <section id="films" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tagline">FILMOGRAPHY (1992–2026)</span>
+          <h2 class="section-title">The Complete <span class="text-gold">69 Movies Reel</span></h2>
+          <p class="section-description">
+            Click any film card to view detailed notes, box office records, directors, and accolades.
+          </p>
+        </div>
+
+        <div class="film-filter-bar">
+          <button class="film-filter-btn active" data-filter="all">All 69 Films</button>
+          <button class="film-filter-btn" data-filter="blockbusters">Blockbusters</button>
+          <button class="film-filter-btn" data-filter="1990s">1990s Era</button>
+          <button class="film-filter-btn" data-filter="2000s">2000s Era</button>
+          <button class="film-filter-btn" data-filter="2010s">2010s Era</button>
+          <button class="film-filter-btn" data-filter="2020s">2020s Finale</button>
+        </div>
+
+        <div id="films-grid-container" class="films-grid">
+          <!-- Dynamically populated via data.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: AUDIO LAUNCH EVENTS -->
+    <section id="launches" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tagline">STADIUM CONCERTS</span>
+          <h2 class="section-title">Historic <span class="text-gold">Audio Launches</span></h2>
+          <p class="section-description">
+            Legendary stadium gatherings, live musical performances, and Thalapathy's iconic speeches.
+          </p>
+        </div>
+
+        <div id="audio-launches-container" class="launches-stack">
+          <!-- Dynamically populated via data.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: AWARDS & ACHIEVEMENTS -->
+    <section id="awards" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tagline">HONORS & TROPHIES</span>
+          <h2 class="section-title">Awards & <span class="text-gold">Recognition</span></h2>
+          <p class="section-description">
+            Celebrating 29 wins and 58 nominations across state, national, and international cinema bodies.
+          </p>
+        </div>
+
+        <div id="awards-grid-container" class="awards-grid">
+          <!-- Dynamically populated via data.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7: POLITICAL JOURNEY -->
+    <section id="political" class="section political-section">
+      <!-- Tamil Nadu Map SVG Silhouette Backdrop -->
+      <svg class="tn-map-bg" viewBox="0 0 500 500" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M180,60 Q260,40 340,90 T420,220 Q440,320 380,410 T240,460 Q120,440 90,320 T140,160 Z" stroke="rgba(212,175,55,0.4)" fill="rgba(212,175,55,0.02)"/>
+      </svg>
+
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tagline">PUBLIC SERVICE & GOVERNANCE</span>
+          <h2 class="section-title">The Political <span class="text-gold">Journey</span></h2>
+          <p class="section-description">
+            A factual chronicle of social welfare, party formation, electoral success, and state leadership.
+          </p>
+        </div>
+
+        <div id="political-timeline-container" class="timeline-spine">
+          <!-- Dynamically populated via data.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 8: FAN WALL -->
+    <section id="fanwall" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tagline">COMMUNITY & TRIBUTES</span>
+          <h2 class="section-title">Global <span class="text-gold">Fan Wall</span></h2>
+          <p class="section-description">
+            Voices of millions of fans, welfare volunteers, and cinema lovers around the world.
+          </p>
+        </div>
+      </div>
+
+      <div class="marquee-container">
+        <div id="fan-marquee-content" class="marquee-content">
+          <!-- Dynamically populated via data.js -->
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 2rem;">
+        <button id="open-tribute-modal-btn" class="btn-magnetic">SUBMIT YOUR TRIBUTE</button>
+    <!-- SECTION 9: MASHUP VIDEO VAULT -->
+    <section id="mashup" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tagline">CINEMATIC CUTS & EDITS</span>
+          <h2 class="section-title">Mashup Video <span class="text-gold">Vault</span></h2>
+          <p class="section-description">
+            High-energy mass reels, dance choreography edits, box office streaks, and political docus.
+          </p>
+        </div>
+
+        <div id="mashup-grid-container" class="mashups-grid">
+          <!-- Dynamically populated via data.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 10: LEGACY & CLOSING (SIGNING OFF VIDEO) -->
+    <section id="legacy" class="legacy-section" style="padding: 4rem 0 6rem; position: relative;">
+      <div class="container" style="max-width: 1000px; margin: 0 auto; text-align: center;">
+        <div class="glass-panel" style="position: relative; border-radius: 20px; overflow: hidden; border: 1px solid var(--border-gold); box-shadow: 0 20px 50px rgba(0,0,0,0.8);">
+          <div style="position: relative; padding-bottom: 56.25%; height: 0; background: #000;">
+            <video id="signing-off-video" loop muted playsinline controls style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit:cover;">
+              <source src="assets/video/signing_off.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div style="position: absolute; top: 1.25rem; right: 1.25rem; z-index: 5;">
+            <button id="signing-off-sound-btn" class="btn-magnetic" style="font-size: 0.8rem; padding: 0.4rem 1rem;">🔊 Unmute Audio</button>
+          </div>
+        </div>
+
+        <div style="margin-top: 2.5rem; text-align: center;">
+          <a href="#hero" class="btn-magnetic">BACK TO TOP ⬆</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- SITE FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div style="font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--accent-gold-bright); margin-bottom: 0.5rem;">
+        THALAPATHY — A CINEMATIC TRIBUTE EXPERIENCE
+      </div>
+      <p>Designed with WebGL, GSAP & HTML5 • Sourced July 2026</p>
+
+      <div class="disclaimer-text">
+        <strong>Legal & Public Disclosure:</strong> Unofficial fan tribute project. Not affiliated with, endorsed by, or officially representing Thalapathy Vijay, Tamilaga Vettri Kazhagam (TVK), or the Government of Tamil Nadu. Statistics, filmography data, and public milestones are compiled strictly from public records as of July 2026.
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL: FILM DETAIL DRAWER -->
+  <div id="film-modal-overlay" class="modal-overlay" aria-hidden="true">
+    <div class="modal-card" style="max-width: 700px;">
+      <button class="modal-close-btn" aria-label="Close modal">&times;</button>
+      <div class="modal-film-layout">
+        <div class="modal-poster-wrapper">
+          <img id="modal-film-poster" src="" alt="Film Poster">
+        </div>
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+            <span id="modal-film-year" class="film-year">1992</span>
+            <span id="modal-film-verdict" class="film-verdict-badge">Blockbuster</span>
+          </div>
+          <h2 id="modal-film-title" class="film-title" style="font-size: 2rem; margin-bottom: 1rem;">Film Title</h2>
+          <div style="display:flex; flex-direction:column; gap:0.5rem; font-size:0.9rem; margin-bottom:1.25rem; color:var(--text-secondary);">
+            <div><strong>Director:</strong> <span id="modal-film-director">-</span></div>
+            <div><strong>Music Director:</strong> <span id="modal-film-music">-</span></div>
+            <div><strong>Box Office:</strong> <span id="modal-film-boxoffice" class="text-gold">-</span></div>
+          </div>
+          <p id="modal-film-note" class="launch-desc" style="background:rgba(255,255,255,0.03); padding:1rem; border-radius:10px; border:1px solid var(--border-subtle); font-size:0.88rem;">
+            Film note content...
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: VIDEO PLAYER -->
+  <div id="video-modal-overlay" class="modal-overlay" aria-hidden="true">
+    <div class="modal-card" style="max-width: 800px; padding: 1.5rem;">
+      <button class="modal-close-btn" aria-label="Close modal">&times;</button>
+      <h3 id="video-modal-title" class="launch-title" style="margin-bottom: 1rem; font-size:1.4rem;">Audio Launch Video</h3>
+      <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px;">
+        <iframe id="video-modal-iframe" style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: SUBMIT TRIBUTE -->
+  <div id="tribute-modal-overlay" class="modal-overlay" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close-btn" aria-label="Close modal">&times;</button>
+      <h3 class="launch-title" style="margin-bottom: 0.5rem;">Submit Tribute Message</h3>
+      <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:1.5rem;">Leave your message for Thalapathy Vijay's legacy monument wall.</p>
+
+      <div style="display:flex; flex-direction:column; gap:1rem;">
+        <input type="text" id="tribute-name" placeholder="Your Name" style="padding:0.8rem 1rem; background:rgba(255,255,255,0.05); border:1px solid var(--border-subtle); border-radius:8px; color:#fff; font-family:var(--font-body);">
+        <input type="text" id="tribute-city" placeholder="Your City / Country (e.g. Madurai, Malaysia)" style="padding:0.8rem 1rem; background:rgba(255,255,255,0.05); border:1px solid var(--border-subtle); border-radius:8px; color:#fff; font-family:var(--font-body);">
+        <textarea id="tribute-msg" rows="4" placeholder="Your Tribute Message..." style="padding:0.8rem 1rem; background:rgba(255,255,255,0.05); border:1px solid var(--border-subtle); border-radius:8px; color:#fff; font-family:var(--font-body); resize:none;"></textarea>
+        <button id="submit-tribute-btn" class="btn-magnetic" style="justify-content:center;">POST TO FAN WALL</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Background Site Audio (All Sections except Hero & Mashup) -->
+  <audio id="bg-site-music" loop preload="auto" src="assets/audio/bg_music.mp3"></audio>
+
+  <!-- JavaScript CDN Dependencies -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+  <!-- Standalone Application Logic & Datasets -->
+  <script>
+/* ==========================================================================
+   THALAPATHY DATASET ENGINE
+   ========================================================================== */
+/**
+ * Verified Content Dataset for THALAPATHY — A Cinematic Tribute Experience
+ * Verified 69-Film Catalog (1992 - 2026)
+ */
+
+window.THALAPATHY_DATA = {
+  stats: {
+    filmsCount: 69,
+    consecutive200cr: 8,
+    highestGrosser: "₹606.42 Cr",
+    highestGrosserFilm: "Leo (2023)",
+    awardsCount: 29,
+    nominationsCount: 58,
+    yearsInCinema: 34,
+    vmiFoundationYear: 2009,
+    tvkFoundationYear: 2024,
+    assemblySeatsWon: 108,
+    cmSwornDate: "10 May 2026"
+  },
+
+  films: [
+  {
+    "id": 1,
+    "year": 1992,
+    "title": "Naalaiya Theerpu",
+    "director": "S. A. Chandrasekhar",
+    "music": "M. M. Keeravani",
+    "verdict": "Debut",
+    "boxoffice": "Debut Release",
+    "note": "Vijay's lead acting debut directed by his father S. A. Chandrasekhar.",
+    "decade": "1990s",
+    "poster": "assets/movies/Naalaiya Theerpu.jpg"
+  },
+  {
+    "id": 2,
+    "year": 1993,
+    "title": "Sendhoorapandi",
+    "director": "S. A. Chandrasekhar",
+    "music": "Deva",
+    "verdict": "Hit",
+    "note": "Co-starred Vijayakanth.",
+    "decade": "1990s",
+    "poster": "assets/movies/Sendhoorapandi.jpg"
+  },
+  {
+    "id": 3,
+    "year": 1994,
+    "title": "Rasigan",
+    "director": "S. A. Chandrasekhar",
+    "music": "Deva",
+    "verdict": "Hit",
+    "note": "First film credited with the title 'Ilayathalapathy'.",
+    "decade": "1990s",
+    "poster": "assets/movies/Rasigan.jpg"
+  },
+  {
+    "id": 4,
+    "year": 1995,
+    "title": "Deva",
+    "director": "S. A. Chandrasekhar",
+    "music": "Deva",
+    "verdict": "Hit",
+    "decade": "1990s",
+    "poster": "assets/movies/Deva.jpg"
+  },
+  {
+    "id": 5,
+    "year": 1995,
+    "title": "Rajavin Parvaiyile",
+    "director": "Janaki Soundar",
+    "music": "Ilaiyaraaja",
+    "verdict": "Average",
+    "note": "Co-starred with Ajith Kumar.",
+    "decade": "1990s",
+    "poster": "assets/movies/Rajavin Parvaiyile.jpg"
+  },
+  {
+    "id": 6,
+    "year": 1995,
+    "title": "Vishnu",
+    "director": "S. A. Chandrasekhar",
+    "music": "Deva",
+    "verdict": "Hit",
+    "decade": "1990s",
+    "poster": "assets/movies/vishnu.jpg"
+  },
+  {
+    "id": 7,
+    "year": 1995,
+    "title": "Chandralekha",
+    "director": "Nambirajan",
+    "music": "Ilaiyaraaja",
+    "verdict": "Average",
+    "decade": "1990s",
+    "poster": "assets/movies/Chandralekha.jpg"
+  },
+  {
+    "id": 8,
+    "year": 1996,
+    "title": "Coimbatore Mappillai",
+    "director": "C. Ranganathan",
+    "music": "Vidyasagar",
+    "verdict": "Hit",
+    "decade": "1990s",
+    "poster": "assets/movies/Coimbatore Mappillai.jpg"
+  },
+  {
+    "id": 9,
+    "year": 1996,
+    "title": "Poove Unakkaga",
+    "director": "Vikraman",
+    "music": "S. A. Rajkumar",
+    "verdict": "Blockbuster",
+    "note": "Major breakthrough film establishing Vijay as a family superstar.",
+    "decade": "1990s",
+    "highlight": true,
+    "poster": "assets/movies/Poove Unakkaga.jpg"
+  },
+  {
+    "id": 10,
+    "year": 1996,
+    "title": "Vasantha Vaasal",
+    "director": "M. R.",
+    "music": "Deva",
+    "verdict": "Average",
+    "decade": "1990s",
+    "poster": "assets/movies/Vasantha Vaasal.jpg"
+  },
+  {
+    "id": 11,
+    "year": 1996,
+    "title": "Maanbumigu Maanavan",
+    "director": "S. A. Chandrasekhar",
+    "music": "Deva",
+    "verdict": "Average",
+    "decade": "1990s",
+    "poster": "assets/movies/Maanbumigu Maanavan.jpg"
+  },
+  {
+    "id": 12,
+    "year": 1996,
+    "title": "Selva",
+    "director": "A. Venkatesh",
+    "music": "Sirpy",
+    "verdict": "Average",
+    "decade": "1990s",
+    "poster": "assets/movies/selva.jpg"
+  },
+  {
+    "id": 13,
+    "year": 1997,
+    "title": "Kaalamellam Kaathiruppen",
+    "director": "R. Sundarrajan",
+    "music": "Deva",
+    "verdict": "Hit",
+    "decade": "1990s",
+    "poster": "assets/movies/Kaalamellam Kaathiruppen.jpg"
+  },
+  {
+    "id": 14,
+    "year": 1997,
+    "title": "Love Today",
+    "director": "Balasekaran",
+    "music": "Shiva",
+    "verdict": "Super Hit",
+    "decade": "1990s",
+    "poster": "assets/movies/Love Today.avif"
+  },
+  {
+    "id": 15,
+    "year": 1997,
+    "title": "Once More",
+    "director": "S. A. Chandrasekhar",
+    "music": "Deva",
+    "verdict": "Hit",
+    "note": "Co-starred legendary Sivaji Ganesan.",
+    "decade": "1990s",
+    "poster": "assets/movies/Once More.jpg"
+  },
+  {
+    "id": 16,
+    "year": 1997,
+    "title": "Nerrukku Ner",
+    "director": "Vasanth",
+    "music": "Deva",
+    "verdict": "Hit",
+    "note": "Co-starred Suriya.",
+    "decade": "1990s",
+    "poster": "assets/movies/NERUKKU NER.jpg"
+  },
+  {
+    "id": 17,
+    "year": 1997,
+    "title": "Kadhalukku Mariyadhai",
+    "director": "Fazil",
+    "music": "Ilaiyaraaja",
+    "verdict": "Blockbuster",
+    "note": "Won TN State Film Award - MGR Award.",
+    "decade": "1990s",
+    "highlight": true,
+    "poster": "assets/movies/Kadhalukku Mariyadhai.jpg"
+  },
+  {
+    "id": 18,
+    "year": 1998,
+    "title": "Ninaithen Vandhai",
+    "director": "K. Selva Bharathy",
+    "music": "Deva",
+    "verdict": "Super Hit",
+    "decade": "1990s",
+    "poster": "assets/movies/Ninaithen Vandhai.jpg"
+  },
+  {
+    "id": 19,
+    "year": 1998,
+    "title": "Priyamudan",
+    "director": "Vincent Selva",
+    "music": "Deva",
+    "verdict": "Hit",
+    "note": "Anti-hero character performance.",
+    "decade": "1990s",
+    "poster": "assets/movies/Priyamudan.jpg"
+  },
+  {
+    "id": 20,
+    "year": 1998,
+    "title": "Nilaave Vaa",
+    "director": "A. Venkatesh",
+    "music": "Vidyasagar",
+    "verdict": "Average",
+    "decade": "1990s",
+    "poster": "assets/movies/Nilaave Vaa.jpg"
+  },
+  {
+    "id": 21,
+    "year": 1999,
+    "title": "Thulladha Manamum Thullum",
+    "director": "Ezhil",
+    "music": "S. A. Rajkumar",
+    "verdict": "Blockbuster",
+    "note": "Ran over 200 days across theatres in Tamil Nadu.",
+    "decade": "1990s",
+    "highlight": true,
+    "poster": "assets/movies/Thulladha Manamum Thullum.jpg"
+  },
+  {
+    "id": 22,
+    "year": 1999,
+    "title": "Endrendrum Kadhal",
+    "director": "Manoj Bhatnaghar",
+    "music": "Manoj Bhatnaghar",
+    "verdict": "Average",
+    "decade": "1990s",
+    "poster": "assets/movies/Endrendrum Kadhal.jpg"
+  },
+  {
+    "id": 23,
+    "year": 1999,
+    "title": "Nenjinile",
+    "director": "S. A. Chandrasekhar",
+    "music": "Deva",
+    "verdict": "Average",
+    "decade": "1990s",
+    "poster": "assets/movies/Nenjinile.jpg"
+  },
+  {
+    "id": 24,
+    "year": 1999,
+    "title": "Minsara Kanna",
+    "director": "K. S. Ravikumar",
+    "music": "Deva",
+    "verdict": "Hit",
+    "decade": "1990s",
+    "poster": "assets/movies/Minsara Kanna.jpg"
+  },
+  {
+    "id": 25,
+    "year": 2000,
+    "title": "Kannukkul Nilavu",
+    "director": "Fazil",
+    "music": "Ilaiyaraaja",
+    "verdict": "Hit",
+    "decade": "2000s",
+    "poster": "assets/movies/Kannukkul Nilavu.jpg"
+  },
+  {
+    "id": 26,
+    "year": 2000,
+    "title": "Kushi",
+    "director": "S. J. Suryah",
+    "music": "Deva",
+    "verdict": "Blockbuster",
+    "note": "Iconic romantic blockbuster.",
+    "decade": "2000s",
+    "poster": "assets/movies/Kushi.jpg"
+  },
+  {
+    "id": 27,
+    "year": 2000,
+    "title": "Priyamaanavale",
+    "director": "K. Selva Bharathy",
+    "music": "S. A. Rajkumar",
+    "verdict": "Blockbuster",
+    "decade": "2000s",
+    "poster": "assets/movies/Priyamaanavale.jpg"
+  },
+  {
+    "id": 28,
+    "year": 2001,
+    "title": "Friends",
+    "director": "Siddique",
+    "music": "Ilaiyaraaja",
+    "verdict": "Blockbuster",
+    "note": "Cult comedy classic co-starring Suriya.",
+    "decade": "2000s",
+    "highlight": true,
+    "poster": "assets/movies/Friends.jpg"
+  },
+  {
+    "id": 29,
+    "year": 2001,
+    "title": "Badri",
+    "director": "P. A. Arun Prasad",
+    "music": "Ramana Gogula",
+    "verdict": "Super Hit",
+    "decade": "2000s",
+    "poster": "assets/movies/Badri.jpg"
+  },
+  {
+    "id": 30,
+    "year": 2001,
+    "title": "Shahjahan",
+    "director": "Ravi",
+    "music": "Mani Sharma",
+    "verdict": "Hit",
+    "note": "Featuring classic chartbuster 'Minnalai Pididhu'.",
+    "decade": "2000s",
+    "poster": "assets/movies/Shahjahan.jpg"
+  },
+  {
+    "id": 31,
+    "year": 2002,
+    "title": "Thamizhan",
+    "director": "Majith",
+    "music": "D. Imman",
+    "verdict": "Hit",
+    "note": "Film debut of Priyanka Chopra.",
+    "decade": "2000s",
+    "poster": "assets/movies/Thamizhan.jpg"
+  },
+  {
+    "id": 32,
+    "year": 2002,
+    "title": "Youth",
+    "director": "Vincent Selva",
+    "music": "Mani Sharma",
+    "verdict": "Super Hit",
+    "decade": "2000s",
+    "poster": "assets/movies/Youth.jpg"
+  },
+  {
+    "id": 33,
+    "year": 2002,
+    "title": "Bagavathi",
+    "director": "A. Venkatesh",
+    "music": "Deva",
+    "verdict": "Hit",
+    "note": "Transition to mass action hero persona.",
+    "decade": "2000s",
+    "poster": "assets/movies/Bagavathi.jpg"
+  },
+  {
+    "id": 34,
+    "year": 2003,
+    "title": "Vaseegara",
+    "director": "K. Selva Bharathy",
+    "music": "S. A. Rajkumar",
+    "verdict": "Hit",
+    "decade": "2000s",
+    "poster": "assets/movies/Vaseegara.jpg"
+  },
+  {
+    "id": 35,
+    "year": 2003,
+    "title": "Pudhiya Geethai",
+    "director": "K. P. Jagan",
+    "music": "Yuvan Shankar Raja",
+    "verdict": "Average",
+    "decade": "2000s",
+    "poster": "assets/movies/Pudhiya Geethai.jpg"
+  },
+  {
+    "id": 36,
+    "year": 2003,
+    "title": "Thirumalai",
+    "director": "Ramana",
+    "music": "Vidyasagar",
+    "verdict": "Blockbuster",
+    "note": "The film that cemented Vijay's mass action stardom.",
+    "decade": "2000s",
+    "highlight": true,
+    "poster": "assets/movies/Thirumalai.jpg"
+  },
+  {
+    "id": 37,
+    "year": 2004,
+    "title": "Udhaya",
+    "director": "Azhagam Perumal",
+    "music": "A. R. Rahman",
+    "verdict": "Average",
+    "decade": "2000s",
+    "poster": "assets/movies/Udhaya.jpg"
+  },
+  {
+    "id": 38,
+    "year": 2004,
+    "title": "Ghilli",
+    "director": "Dharani",
+    "music": "Vidyasagar",
+    "verdict": "Industry Hit",
+    "boxoffice": "₹500M+ Domestic",
+    "note": "First Tamil film to gross ₹50 Crores domestically.",
+    "decade": "2000s",
+    "highlight": true,
+    "poster": "assets/movies/Ghilli.jpg"
+  },
+  {
+    "id": 39,
+    "year": 2004,
+    "title": "Madhurey",
+    "director": "Ramana Madhesh",
+    "music": "Vidyasagar",
+    "verdict": "Super Hit",
+    "decade": "2000s",
+    "poster": "assets/movies/Madurey.jpg"
+  },
+  {
+    "id": 40,
+    "year": 2005,
+    "title": "Thirupaachi",
+    "director": "Perarasu",
+    "music": "Dhani / Mani Sharma",
+    "verdict": "Blockbuster",
+    "decade": "2000s",
+    "highlight": true,
+    "poster": "assets/movies/Thirupaachi.jpg"
+  },
+  {
+    "id": 41,
+    "year": 2005,
+    "title": "Sachein",
+    "director": "John Mahendran",
+    "music": "Devi Sri Prasad",
+    "verdict": "Hit",
+    "decade": "2000s",
+    "poster": "assets/movies/Sachein.jpg"
+  },
+  {
+    "id": 42,
+    "year": 2005,
+    "title": "Sukran",
+    "director": "S. A. Chandrasekhar",
+    "music": "Vijay Antony",
+    "verdict": "Special Appearance",
+    "note": "Extended special appearance role.",
+    "decade": "2000s",
+    "poster": "assets/movies/Sukran.jpg"
+  },
+  {
+    "id": 43,
+    "year": 2005,
+    "title": "Sivakasi",
+    "director": "Perarasu",
+    "music": "Srikanth Deva",
+    "verdict": "Blockbuster",
+    "decade": "2000s",
+    "poster": "assets/movies/Sivakasi.jpg"
+  },
+  {
+    "id": 44,
+    "year": 2006,
+    "title": "Aathi",
+    "director": "Ramana",
+    "music": "Vidyasagar",
+    "verdict": "Average",
+    "decade": "2000s",
+    "poster": "assets/movies/Aathi.jpg"
+  },
+  {
+    "id": 45,
+    "year": 2007,
+    "title": "Pokkiri",
+    "director": "Prabhu Deva",
+    "music": "Mani Sharma",
+    "verdict": "Blockbuster",
+    "note": "Ran for over 200 days with legendary mass frenzy.",
+    "decade": "2000s",
+    "highlight": true,
+    "poster": "assets/movies/Pokkiri.jpg"
+  },
+  {
+    "id": 46,
+    "year": 2007,
+    "title": "Azhagiya Tamil Magan",
+    "director": "Bharathan",
+    "music": "A. R. Rahman",
+    "verdict": "Hit",
+    "note": "Vijay performed dual roles.",
+    "decade": "2000s",
+    "poster": "assets/movies/Azhagiya Tamil Magan.jpg"
+  },
+  {
+    "id": 47,
+    "year": 2008,
+    "title": "Kuruvi",
+    "director": "Dharani",
+    "music": "Vidyasagar",
+    "verdict": "Average",
+    "decade": "2000s",
+    "poster": "assets/movies/Kuruvi.jpg"
+  },
+  {
+    "id": 48,
+    "year": 2009,
+    "title": "Villu",
+    "director": "Prabhu Deva",
+    "music": "Devi Sri Prasad",
+    "verdict": "Average",
+    "decade": "2000s",
+    "poster": "assets/movies/Villu.jpg"
+  },
+  {
+    "id": 49,
+    "year": 2009,
+    "title": "Vettaikaaran",
+    "director": "B. Babusivan",
+    "music": "Vijay Antony",
+    "verdict": "Super Hit",
+    "decade": "2000s",
+    "poster": "assets/movies/Vettaikaaran.jpg"
+  },
+  {
+    "id": 50,
+    "year": 2010,
+    "title": "Sura",
+    "director": "S. P. Rajkumar",
+    "music": "Mani Sharma",
+    "verdict": "Milestone Release",
+    "note": "Vijay's 50th landmark feature film.",
+    "decade": "2010s",
+    "poster": "assets/movies/Sura.jpg"
+  },
+  {
+    "id": 51,
+    "year": 2011,
+    "title": "Kaavalan",
+    "director": "Siddique",
+    "music": "Vidyasagar",
+    "verdict": "Super Hit",
+    "note": "Screened at Shanghai International Film Festival.",
+    "decade": "2010s",
+    "poster": "assets/movies/Kaavalan.jpg"
+  },
+  {
+    "id": 52,
+    "year": 2011,
+    "title": "Velayudham",
+    "director": "M. Raja",
+    "music": "Vijay Antony",
+    "verdict": "Blockbuster",
+    "decade": "2010s",
+    "poster": "assets/movies/Velayudham.jpg"
+  },
+  {
+    "id": 53,
+    "year": 2012,
+    "title": "Nanban",
+    "director": "S. Shankar",
+    "music": "Harris Jayaraj",
+    "verdict": "Blockbuster",
+    "note": "Critically acclaimed Shankar directorial.",
+    "decade": "2010s",
+    "highlight": true,
+    "poster": "assets/movies/Nanban.jpg"
+  },
+  {
+    "id": 54,
+    "year": 2012,
+    "title": "Thuppakki",
+    "director": "A. R. Murugadoss",
+    "music": "Harris Jayaraj",
+    "verdict": "Blockbuster",
+    "boxoffice": "₹180Cr+ WW",
+    "note": "Entered ₹100Cr club, won 6 Vijay Awards.",
+    "decade": "2010s",
+    "highlight": true,
+    "poster": "assets/movies/Thuppakki.jpg"
+  },
+  {
+    "id": 55,
+    "year": 2013,
+    "title": "Thalaivaa",
+    "director": "A. L. Vijay",
+    "music": "G. V. Prakash Kumar",
+    "verdict": "Hit",
+    "decade": "2010s",
+    "poster": "assets/movies/Thalaivaa.jpg"
+  },
+  {
+    "id": 56,
+    "year": 2014,
+    "title": "Jilla",
+    "director": "R. T. Neason",
+    "music": "D. Imman",
+    "verdict": "Super Hit",
+    "note": "Co-starred with Mohanlal.",
+    "decade": "2010s",
+    "poster": "assets/movies/Jilla.jpg"
+  },
+  {
+    "id": 57,
+    "year": 2014,
+    "title": "Kaththi",
+    "director": "A. R. Murugadoss",
+    "music": "Anirudh Ravichander",
+    "verdict": "Blockbuster",
+    "boxoffice": "₹130Cr+ WW",
+    "note": "Dual role highlighting social farmer issues.",
+    "decade": "2010s",
+    "highlight": true,
+    "poster": "assets/movies/Kaththi.jpeg"
+  },
+  {
+    "id": 58,
+    "year": 2015,
+    "title": "Puli",
+    "director": "Chimbu Deven",
+    "music": "Devi Sri Prasad",
+    "verdict": "Average",
+    "decade": "2010s",
+    "poster": "assets/movies/Puli.jpg"
+  },
+  {
+    "id": 59,
+    "year": 2016,
+    "title": "Theri",
+    "director": "Atlee",
+    "music": "G. V. Prakash Kumar",
+    "verdict": "Blockbuster",
+    "boxoffice": "₹150Cr+ WW",
+    "decade": "2010s",
+    "highlight": true,
+    "poster": "assets/movies/Theri.jpg"
+  },
+  {
+    "id": 60,
+    "year": 2017,
+    "title": "Bairavaa",
+    "director": "Bharathan",
+    "music": "Santhosh Narayanan",
+    "verdict": "Super Hit",
+    "decade": "2010s",
+    "poster": "assets/movies/Bairavaa.jpg"
+  },
+  {
+    "id": 61,
+    "year": 2017,
+    "title": "Mersal",
+    "director": "Atlee",
+    "music": "A. R. Rahman",
+    "verdict": "Blockbuster",
+    "boxoffice": "₹253.45Cr WW",
+    "note": "Started the historical 8-consecutive ₹200Cr+ worldwide gross streak.",
+    "decade": "2010s",
+    "highlight": true,
+    "poster": "assets/movies/Mersal.jpeg"
+  },
+  {
+    "id": 62,
+    "year": 2018,
+    "title": "Sarkar",
+    "director": "A. R. Murugadoss",
+    "music": "A. R. Rahman",
+    "verdict": "Blockbuster",
+    "boxoffice": "₹237.26Cr WW",
+    "decade": "2010s",
+    "poster": "assets/movies/Sarkar.jpeg"
+  },
+  {
+    "id": 63,
+    "year": 2019,
+    "title": "Bigil",
+    "director": "Atlee",
+    "music": "A. R. Rahman",
+    "verdict": "Blockbuster",
+    "boxoffice": "₹296.08Cr WW",
+    "note": "Highest grossing Tamil film of 2019.",
+    "decade": "2010s",
+    "highlight": true,
+    "poster": "assets/movies/Bigil.jpg"
+  },
+  {
+    "id": 64,
+    "year": 2021,
+    "title": "Master",
+    "director": "Lokesh Kanagaraj",
+    "music": "Anirudh Ravichander",
+    "verdict": "Blockbuster",
+    "boxoffice": "₹224.88Cr WW",
+    "note": "Revived post-lockdown cinema exhibition across India.",
+    "decade": "2020s",
+    "highlight": true,
+    "poster": "assets/movies/Master.jpg"
+  },
+  {
+    "id": 65,
+    "year": 2022,
+    "title": "Beast",
+    "director": "Nelson Dilipkumar",
+    "music": "Anirudh Ravichander",
+    "verdict": "Super Hit",
+    "boxoffice": "₹240Cr+ WW",
+    "decade": "2020s",
+    "poster": "assets/movies/Beast.webp"
+  },
+  {
+    "id": 66,
+    "year": 2023,
+    "title": "Varisu",
+    "director": "Vamshi Paidipally",
+    "music": "Thaman S",
+    "verdict": "Blockbuster",
+    "boxoffice": "₹299.20Cr WW",
+    "decade": "2020s",
+    "poster": "assets/movies/Varisu.webp"
+  },
+  {
+    "id": 67,
+    "year": 2023,
+    "title": "Leo",
+    "director": "Lokesh Kanagaraj",
+    "music": "Anirudh Ravichander",
+    "verdict": "All-Time Blockbuster",
+    "boxoffice": "₹606.42Cr WW",
+    "note": "Vijay's highest-grossing film of all time.",
+    "decade": "2020s",
+    "highlight": true,
+    "poster": "assets/movies/Leo.jpg"
+  },
+  {
+    "id": 68,
+    "year": 2024,
+    "title": "The Greatest of All Time (GOAT)",
+    "director": "Venkat Prabhu",
+    "music": "Yuvan Shankar Raja",
+    "verdict": "Blockbuster",
+    "boxoffice": "₹458.44Cr WW",
+    "decade": "2020s",
+    "highlight": true,
+    "poster": "assets/movies/The Greatest of All Time (GOAT).jpeg"
+  },
+  {
+    "id": 69,
+    "year": 2026,
+    "title": "Jana Nayagan",
+    "director": "H. Vinoth",
+    "music": "Anirudh Ravichander",
+    "verdict": "Grand Final Release",
+    "note": "Vijay's 69th & final film prior to full political transition.",
+    "decade": "2020s",
+    "highlight": true,
+    "poster": "assets/movies/Jana Nayagan.avif"
+  }
+],
+
+  audioLaunches: [
+    {
+      id: 1,
+      title: "Thalapathy Thiruvizha — Jana Nayagan Audio Launch",
+      date: "27 Dec 2025",
+      venue: "Bukit Jalil National Stadium, Kuala Lumpur, Malaysia",
+      attendance: "100,000+ Spectators",
+      youtubeId: "",
+      externalUrl: "https://zee5.onelink.me/RlQq/xcvf2w8q",
+      platform: "ZEE5",
+      description: "Record-breaking concert celebration featuring Anirudh Ravichander, co-stars Pooja Hegde and Bobby Deol, entering the Malaysian Book of Records for the largest single-event audience.",
+      badge: "Historic Finale",
+      image: "assets/launches/Thalapathy Thiruvizha — Jana Nayagan Audio Launch.webp"
+    },
+    {
+      id: 2,
+      title: "Leo Audio Launch & Celebration",
+      date: "Sept 2023",
+      venue: "Nehru Stadium, Chennai (Safety Retrospect)",
+      attendance: "Pass Requests Exceeded 150,000+",
+      youtubeId: "Z6HUc_Yb_OI",
+      externalUrl: "https://youtu.be/Z6HUc_Yb_OI?si=gAqZAKbWffzV5wic",
+      platform: "YouTube",
+      description: "Due to unprecedented demand and fan turnout exceeding safety limits, the live stadium event was converted into a historic digital speech broadcast watched by millions globally.",
+      badge: "Record Demand",
+      image: "assets/movies/Leo.jpg"
+    },
+    {
+      id: 3,
+      title: "Master Audio & Teaser Gala",
+      date: "15 Mar 2020",
+      venue: "Leela Palace & Broadcast, Chennai",
+      attendance: "TV Broadcast Millions",
+      youtubeId: "iv-6R1Cq41Y",
+      externalUrl: "https://youtu.be/iv-6R1Cq41Y?si=1-RVEBN4w0xgM3y_",
+      platform: "YouTube",
+      description: "Iconic speech where Vijay addressed fans about perseverance, friendship with co-star Vijay Sethupathi, and standing tall through turbulent times.",
+      badge: "Cult Speech",
+      image: "assets/launches/master audio lanuch.jpg"
+    },
+    {
+      id: 4,
+      title: "Bigil Grand Audio Festival",
+      date: "19 Sept 2019",
+      venue: "Sairam Engineering College, Chennai",
+      attendance: "30,000+ Students & Fans",
+      youtubeId: "cHJnzFuPTCc",
+      externalUrl: "https://youtu.be/cHJnzFuPTCc?si=vO5iUMhoyYyOdiQ5",
+      platform: "YouTube",
+      description: "Electric stadium energy where Vijay sang 'Verithanam' live and delivered his legendary advice on overcoming negative energy.",
+      badge: "Stadia Concert",
+      image: "assets/launches/bigil audio lanuch.jpg"
+    },
+    {
+      id: 5,
+      title: "Mersal Symphony Live",
+      date: "20 Aug 2017",
+      venue: "Nehru Indoor Stadium, Chennai",
+      attendance: "40,000+ Crowd",
+      youtubeId: "GSGCMoNxzZg",
+      externalUrl: "https://youtu.be/GSGCMoNxzZg?si=055kz9AyTAY1Fb6o",
+      platform: "YouTube",
+      description: "Historical concert featuring A. R. Rahman performing live orchestra alongside Vijay's 25th year acting celebration.",
+      badge: "AR Rahman Live",
+      image: "assets/launches/mersel audio lanuch.jpg"
+    }
+  ],
+
+  awards: [
+    {
+      id: 1,
+      title: "Vijay Award for Icon of the Year",
+      year: "2008",
+      film: "Cultural Impact & Mass Appeal",
+      organization: "2nd Annual Vijay Awards",
+      category: "Icon Honor",
+      note: "Honored for immense cultural impact and unprecedented mass appeal across South India.",
+      image: "assets/awards/Vijay Award for Icon of the Year (2008).jpg"
+    },
+    {
+      id: 2,
+      title: "Entertainer of the Year Awards",
+      year: "2007, 2012, 2014",
+      film: "Pokkiri / Thuppakki / Kaththi",
+      organization: "Vijay Awards (3-Time Winner)",
+      category: "Popular Choice",
+      note: "Won multiple times for Pokkiri (2007), Nanban & Thuppakki (2012), and Kaththi (2014).",
+      image: "assets/awards/Entertainer of the Year Awards.jpg"
+    },
+    {
+      id: 3,
+      title: "Kalaimamani Award",
+      year: "1998",
+      film: "State Cultural Honor",
+      organization: "Government of Tamil Nadu",
+      category: "State Honor",
+      note: "Conferred by the Government of Tamil Nadu for supreme excellence in arts and literature.",
+      image: "assets/awards/Kalaimamani Award (1998).jpg"
+    },
+    {
+      id: 4,
+      title: "Dr. M.G.R. Honorary Award / MGR Award",
+      year: "2000",
+      film: "Thulladha Manamum Thullum",
+      organization: "Government of Tamil Nadu",
+      category: "State Honor",
+      note: "Presented by the Government of Tamil Nadu honoring career excellence and societal impact.",
+      image: "assets/awards/Dr. M.G.R. Honorary Award  MGR Award (2000).jpg"
+    },
+    {
+      id: 5,
+      title: "Superstar of Tomorrow",
+      year: "2006",
+      film: "Inaugural Vijay Awards",
+      organization: "Vijay Awards",
+      category: "Special Milestone",
+      note: "Recognized at the inaugural Vijay Awards for dominating Tamil cinema's box office future.",
+      image: "assets/awards/Superstar of Tomorrow (2006).jpg"
+    },
+    {
+      id: 6,
+      title: "Tamil Nadu State Film Award - Best Actor",
+      year: "1997",
+      film: "Kadhalukku Mariyadhai",
+      organization: "Government of Tamil Nadu",
+      category: "State Honor",
+      note: "Won for his critically acclaimed lead performance in Kadhalukku Mariyadhai.",
+      image: "assets/awards/Tamil Nadu State Film Award for Best Actor (1997).jpg"
+    },
+    {
+      id: 7,
+      title: "Ananda Vikatan Cinema Awards - Best Actor",
+      year: "2012 & 2018",
+      film: "Thuppakki & Mersal",
+      organization: "Ananda Vikatan Cinema Awards",
+      category: "Critical Acclaim",
+      note: "Awarded Best Actor for his powerhouse performances in Thuppakki (2012) and Mersal (2018).",
+      image: "assets/awards/Ananda Vikatan Cinema Awards.jpg"
+    },
+    {
+      id: 8,
+      title: "Behindwoods Gold Medals — Samrat of Box Office",
+      year: "2018 & 2021",
+      film: "Mersal & Master",
+      organization: "Behindwoods Gold Medals",
+      category: "Box Office Samrat",
+      note: "Honored as People's Choice Actor and Samrat of South Indian Box Office Excellence.",
+      image: "assets/awards/Behindwoods Gold Medals.jpg"
+    },
+    {
+      id: 9,
+      title: "IARA International Best Actor Nomination & Honor",
+      year: "2018",
+      film: "Mersal (2017)",
+      organization: "National Film Awards UK / IARA",
+      category: "Global Honor",
+      note: "Recognized internationally at the UK IARA Awards for Best International Actor in Mersal.",
+      image: "assets/awards/IARA Awards (UK) Best International Actor for his performance in Mersal (2018).jpg"
+    }
+  ],
+
+  politicalTimeline: [
+    {
+      id: 1,
+      year: "2009",
+      title: "Vijay Makkal Iyakkam (VMI) Foundation",
+      description: "Founded Vijay Makkal Iyakkam as a structured social welfare movement. Over 15 years, VMI executed free meal centers, blood donation drives, educational scholarships, and major disaster relief during Cyclone Thane (2011) and Kerala floods (2018).",
+      mediaType: "image",
+      mediaUrl: "assets/timeline/vijay makkal iyakkam.jpg"
+    },
+    {
+      id: 2,
+      year: "Feb 2024",
+      title: "Formation of Tamilaga Vettri Kazhagam (TVK)",
+      description: "Vijay formally launched his political party, Tamilaga Vettri Kazhagam (TVK), declaring full political commitment and announcing retirement from feature film acting following his 69th project.",
+      mediaType: "image",
+      mediaUrl: "assets/timeline/Formation of Tamilaga Vettri Kazhagam (TVK).webp"
+    },
+    {
+      id: 3,
+      year: "2024 – 2025",
+      title: "Statewide Grassroots & Organizational Drives",
+      description: "TVK constructed district-level committees across all 234 assembly constituencies in Tamil Nadu, organizing student felicitation events, women's empowerment forums, and public policy conferences with an independent political platform.",
+      mediaType: "image",
+      mediaUrl: "assets/timeline/Statewide Grassroots & Organizational Drives.avif"
+    },
+    {
+      id: 4,
+      year: "Apr 2026",
+      title: "2026 Tamil Nadu Legislative Assembly Election",
+      description: "TVK contested its maiden election across Tamil Nadu, presenting a governance platform focused on welfare, educational reform, economic equity, and transparent public administration.",
+      mediaType: "image",
+      mediaUrl: "assets/timeline/2026 Tamil Nadu Legislative Assembly Election.jpg"
+    },
+    {
+      id: 5,
+      year: "May 2026",
+      title: "Historical Election Outcome — 108 Assembly Seats",
+      description: "TVK emerged as the single largest political party in the 234-seat Tamil Nadu Legislative Assembly winning 108 seats, securing mandate to lead the government in coalition.",
+      mediaType: "image",
+      mediaUrl: "assets/timeline/Historical Election Outcome — 108 Assembly Seats.jpg"
+    },
+    {
+      id: 6,
+      year: "10 May 2026",
+      title: "Sworn in as 22nd Chief Minister of Tamil Nadu",
+      description: "C. Joseph Vijay was officially sworn in as the 22nd Chief Minister of Tamil Nadu, marking one of the most remarkable transitions from cinema to governance in modern Indian political history.",
+      mediaType: "video",
+      mediaUrl: "assets/timeline/Sworn in as 22nd Chief Minister of Tamil Nadu.mp4"
+    }
+  ],
+
+  fanQuotes: [
+    { text: "Thalapathy taught us that real leadership is about humility and standing by the people when they need you most.", author: "Santhosh Kumar", location: "Madurai Chapter" },
+    { text: "From watching Ghilli in 2004 to seeing him step into the State Assembly in 2026 — what an extraordinary journey of inspiration.", author: "Kavitha Rajan", location: "Chennai Central" },
+    { text: "34 years, 69 movies, 8 consecutive 200 Crore blockbusters, and an unbeatable legacy of generosity through VMI.", author: "Dr. Arvind Ramesh", location: "Coimbatore" },
+    { text: "He entered cinema without privilege and leaves cinema at the absolute top of the box office for the service of the state.", author: "Praveen V.", location: "Kuala Lumpur, Malaysia" }
+  ],
+
+  mashups: [
+    {
+      id: 1,
+      title: "Thalapathy Vijay — Ultimate Tribute Mashup",
+      subtitle: "34 Years of Glory • Screen Dominance to Public Leadership",
+      video: "assets/video/mashup.mp4",
+      badge: "FEATURED MASHUP",
+      poster: "assets/images/legacy.jpg"
+    }
+  ]
+};
+
+
+/* ==========================================================================
+   WEBGL HERO PARTICLES
+   ========================================================================== */
+/**
+ * WebGL Hero Particle Canvas using Three.js
+ * Creates an interactive dark luxury particle field with golden embers reacting to cursor movement.
+ */
+
+window.initHeroWebGL = function() {
+  const container = document.getElementById('hero-canvas');
+  if (!container || typeof THREE === 'undefined') return;
+
+  // Scene setup
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x08090C, 0.0015);
+
+  // Camera setup
+  const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.z = 120;
+
+  // Renderer setup
+  const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  container.appendChild(renderer.domElement);
+
+  // Particles Creation
+  const particleCount = 2500;
+  const geometry = new THREE.BufferGeometry();
+  const positions = new Float32Array(particleCount * 3);
+  const colors = new Float32Array(particleCount * 3);
+  const scales = new Float32Array(particleCount);
+
+  const colorGold = new THREE.Color(0xF5D061);
+  const colorDarkGold = new THREE.Color(0xD4AF37);
+  const colorWhite = new THREE.Color(0xFFFFFF);
+
+  for (let i = 0; i < particleCount; i++) {
+    positions[i * 3] = (Math.random() - 0.5) * 300;
+    positions[i * 3 + 1] = (Math.random() - 0.5) * 300;
+    positions[i * 3 + 2] = (Math.random() - 0.5) * 300;
+
+    // Mixed luxury colors
+    const rand = Math.random();
+    let mixedColor = colorGold;
+    if (rand < 0.6) mixedColor = colorDarkGold;
+    else if (rand < 0.85) mixedColor = colorWhite;
+
+    colors[i * 3] = mixedColor.r;
+    colors[i * 3 + 1] = mixedColor.g;
+    colors[i * 3 + 2] = mixedColor.b;
+
+    scales[i] = Math.random() * 2.5 + 0.5;
+  }
+
+  geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+  // Particle Material
+  const material = new THREE.PointsMaterial({
+    size: 2.2,
+    vertexColors: true,
+    transparent: true,
+    opacity: 0.7,
+    blending: THREE.AdditiveBlending
+  });
+
+  const particleSystem = new THREE.Points(geometry, material);
+  scene.add(particleSystem);
+
+  // Mouse Interactivity
+  let mouseX = 0;
+  let mouseY = 0;
+  let targetX = 0;
+  let targetY = 0;
+
+  const windowHalfX = window.innerWidth / 2;
+  const windowHalfY = window.innerHeight / 2;
+
+  function onDocumentMouseMove(event) {
+    mouseX = (event.clientX - windowHalfX) * 0.08;
+    mouseY = (event.clientY - windowHalfY) * 0.08;
+  }
+
+  document.addEventListener('mousemove', onDocumentMouseMove, false);
+
+  // Resize Handler
+  function onWindowResize() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  }
+
+  window.addEventListener('resize', onWindowResize, false);
+
+  // Animation Loop
+  let clock = new THREE.Clock();
+
+  function animate() {
+    requestAnimationFrame(animate);
+
+    const elapsedTime = clock.getElapsedTime();
+
+    targetX += (mouseX - targetX) * 0.05;
+    targetY += (mouseY - targetY) * 0.05;
+
+    particleSystem.rotation.y = elapsedTime * 0.03 + targetX * 0.005;
+    particleSystem.rotation.x = Math.sin(elapsedTime * 0.02) * 0.1 + targetY * 0.005;
+
+    // Subtle wave motion
+    const positionAttr = geometry.attributes.position;
+    for (let i = 0; i < particleCount; i++) {
+      const y = positionAttr.getY(i);
+      positionAttr.setY(i, y + Math.sin(elapsedTime + i) * 0.03);
+    }
+    positionAttr.needsUpdate = true;
+
+    renderer.render(scene, camera);
+  }
+
+  animate();
+};
+
+
+/* ==========================================================================
+   LENIS SMOOTH SCROLL ENGINE
+   ========================================================================== */
+/**
+ * Lenis Smooth Scroll Integration synced with GSAP ScrollTrigger
+ */
+
+window.initSmoothScroll = function() {
+  if (typeof Lenis === 'undefined') return;
+
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    orientation: 'vertical',
+    gestureOrientation: 'vertical',
+    smoothWheel: true,
+    wheelMultiplier: 1,
+    touchMultiplier: 2,
+    infinite: false
+  });
+
+  window.lenisInstance = lenis;
+
+  // Sync GSAP ScrollTrigger ticker with Lenis
+  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    lenis.on('scroll', ScrollTrigger.update);
+
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+
+    gsap.ticker.lagSmoothing(0);
+  } else {
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+  }
+
+  // Handle anchor link click smooth scrolling
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+      const targetEl = document.querySelector(targetId);
+      if (targetEl) {
+        lenis.scrollTo(targetEl, { offset: -50, duration: 1.5 });
+      }
+    });
+  });
+};
+
+
+/* ==========================================================================
+   GSAP & SCROLLTRIGGER ANIMATIONS
+   ========================================================================== */
+/**
+ * GSAP + ScrollTrigger Animations & Timeline Choreography
+ */
+
+window.initAnimations = function() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Respect reduced motion settings
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) return;
+
+  // 1. Hero Stagger Text & Button Fade-in
+  const heroTl = gsap.timeline({ delay: 0.5 });
+
+  heroTl
+    .from('.hero-subtitle', { y: 30, opacity: 0, duration: 1, ease: 'power3.out' })
+    .from('.hero-title', { y: 50, opacity: 0, duration: 1.2, ease: 'power4.out' }, '-=0.6')
+    .from('.hero-description', { y: 30, opacity: 0, duration: 1, ease: 'power3.out' }, '-=0.8');
+
+  // 2. Navbar Background Blur on Scroll
+  ScrollTrigger.create({
+    trigger: 'body',
+    start: 'top -80px',
+    onEnter: () => document.querySelector('.navbar').classList.add('scrolled'),
+    onLeaveBack: () => document.querySelector('.navbar').classList.remove('scrolled')
+  });
+
+  // 3. Side Progress Rail Active Dot Sync
+  const sections = document.querySelectorAll('section[id]');
+  sections.forEach((section) => {
+    const sectionId = section.getAttribute('id');
+    const dot = document.querySelector(`.rail-dot[data-target="#${sectionId}"]`);
+
+    if (dot) {
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'top 40%',
+        end: 'bottom 40%',
+        onToggle: (self) => {
+          if (self.isActive) {
+            document.querySelectorAll('.rail-dot').forEach(d => d.classList.remove('active'));
+            dot.classList.add('active');
+          }
+        }
+      });
+    }
+  });
+
+  // 4. About Section Parallax Reveal
+  gsap.from('#about .about-image-wrapper', {
+    scrollTrigger: {
+      trigger: '#about',
+      start: 'top 75%'
+    },
+    x: -60,
+    opacity: 0,
+    duration: 1.2,
+    ease: 'power3.out'
+  });
+
+  gsap.from('#about .about-bio-text', {
+    scrollTrigger: {
+      trigger: '#about',
+      start: 'top 75%'
+    },
+    x: 60,
+    opacity: 0,
+    duration: 1.2,
+    ease: 'power3.out'
+  });
+
+  // 5. Career Statistics Animated Counter Scrub
+  const statNumbers = document.querySelectorAll('.stat-number');
+  statNumbers.forEach((statEl) => {
+    const targetVal = parseFloat(statEl.getAttribute('data-target'));
+    const isCurrency = statEl.innerText.includes('₹');
+    const suffix = statEl.getAttribute('data-suffix') || '';
+
+    gsap.fromTo(statEl, 
+      { innerText: 0 },
+      {
+        innerText: targetVal,
+        duration: 2.5,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '#stats',
+          start: 'top 75%'
+        },
+        snap: { innerText: targetVal > 100 ? 0.1 : 1 },
+        onUpdate: function() {
+          const val = Number(this.targets()[0].innerText);
+          if (isCurrency) {
+            statEl.innerText = `₹${val.toFixed(2)}${suffix}`;
+          } else {
+            statEl.innerText = `${Math.floor(val)}${suffix}`;
+          }
+        }
+      }
+    );
+  });
+
+  // 6. Section Titles Stagger Reveal
+  const sectionHeaders = document.querySelectorAll('.section-header');
+  sectionHeaders.forEach((header) => {
+    gsap.from(header.children, {
+      scrollTrigger: {
+        trigger: header,
+        start: 'top 80%'
+      },
+      y: 40,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.2,
+      ease: 'power3.out'
+    });
+  });
+
+  // 7. Political Timeline Spine Growth & Item Reveal
+  const timelineItems = document.querySelectorAll('.timeline-item');
+  timelineItems.forEach((item) => {
+    gsap.from(item, {
+      scrollTrigger: {
+        trigger: item,
+        start: 'top 85%'
+      },
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      ease: 'power3.out'
+    });
+  });
+
+  // 8. Awards Cards Stagger Fade
+  gsap.from('.award-card', {
+    scrollTrigger: {
+      trigger: '#awards',
+      start: 'top 75%'
+    },
+    y: 50,
+    opacity: 0,
+    duration: 1,
+    stagger: 0.15,
+    ease: 'power3.out'
+  });
+};
+
+
+/* ==========================================================================
+   MAIN APPLICATION CONTROLLER
+   ========================================================================== */
+/**
+ * THALAPATHY — Main Application Controller & UI Logic
+ */
+
+// Disable browser automatic scroll restoration so page refresh starts from top
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (window.location.hash) {
+    history.replaceState(null, null, window.location.pathname);
+  }
+
+  const DATA = window.THALAPATHY_DATA || {};
+
+  // Safely initialize all 10 sections with individual try-catch blocks
+  try { initLoader(); } catch (e) { console.error('Loader error:', e); }
+  try { initCustomCursor(); } catch (e) { console.error('Cursor error:', e); }
+  try { initAudioEngine(); } catch (e) { console.error('Audio engine error:', e); }
+  try { if (DATA.films) renderFilms(DATA.films); } catch (e) { console.error('Films render error:', e); }
+  try { initFilmFilters(); } catch (e) { console.error('Film filters error:', e); }
+  try { if (DATA.audioLaunches) renderAudioLaunches(DATA.audioLaunches); } catch (e) { console.error('Launches render error:', e); }
+  try { if (DATA.awards) renderAwards(DATA.awards); } catch (e) { console.error('Awards render error:', e); }
+  try { if (DATA.politicalTimeline) renderPoliticalTimeline(DATA.politicalTimeline); } catch (e) { console.error('Political timeline error:', e); }
+  try { if (DATA.fanQuotes) renderFanMarquee(DATA.fanQuotes); } catch (e) { console.error('Fan marquee error:', e); }
+  try { if (DATA.mashups) renderMashups(DATA.mashups); } catch (e) { console.error('Mashups render error:', e); }
+  try { initSigningOffVideo(); } catch (e) { console.error('Signing off video error:', e); }
+  try { initModalHandlers(); } catch (e) { console.error('Modal handlers error:', e); }
+
+  // Initialize Third-party Engines once scripts are ready
+  setTimeout(() => {
+    try { if (typeof initHeroWebGL === 'function') initHeroWebGL(); } catch (e) {}
+    try { if (typeof initSmoothScroll === 'function') initSmoothScroll(); } catch (e) {}
+    try { if (typeof initAnimations === 'function') initAnimations(); } catch (e) {}
+    try { if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh(); } catch (e) {}
+  }, 100);
+});
+
+/* --------------------------------------------------------------------------
+   1. LOADER SCREEN CONTROLLER
+   -------------------------------------------------------------------------- */
+function initLoader() {
+  const loader = document.getElementById('loader-screen');
+  const barFill = document.querySelector('.loader-bar-fill');
+  const percentage = document.querySelector('.loader-percentage');
+  if (!loader || !barFill || !percentage) return;
+
+  let progress = 0;
+  const interval = setInterval(() => {
+    progress += Math.floor(Math.random() * 15) + 5;
+    if (progress >= 100) {
+      progress = 100;
+      clearInterval(interval);
+      setTimeout(() => {
+        loader.classList.add('loaded');
+      }, 400);
+    }
+    barFill.style.width = `${progress}%`;
+    percentage.innerText = `${progress}%`;
+  }, 60);
+}
+
+/* --------------------------------------------------------------------------
+   2. CUSTOM MAGNETIC CURSOR
+   -------------------------------------------------------------------------- */
+function initCustomCursor() {
+  const cursor = document.querySelector('.custom-cursor');
+  const follower = document.querySelector('.custom-cursor-follower');
+  if (!cursor || !follower) return;
+
+  let mouseX = 0, mouseY = 0;
+  let followerX = 0, followerY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+  });
+
+  function renderFollower() {
+    followerX += (mouseX - followerX) * 0.15;
+    followerY += (mouseY - followerY) * 0.15;
+    follower.style.transform = `translate(${followerX}px, ${followerY}px)`;
+    requestAnimationFrame(renderFollower);
+  }
+  renderFollower();
+
+  // Add hover effect for interactive elements
+  const interactiveSelector = 'a, button, .film-card, .launch-thumbnail-box, .rail-dot, input, textarea';
+  document.addEventListener('mouseover', (e) => {
+    if (e.target.closest(interactiveSelector)) {
+      document.body.classList.add('cursor-hover');
+    }
+  });
+
+  document.addEventListener('mouseout', (e) => {
+    if (e.target.closest(interactiveSelector)) {
+      document.body.classList.remove('cursor-hover');
+    }
+  });
+}
+
+/* --------------------------------------------------------------------------
+   3. WEB AUDIO SYNTHESIZER (STADIUM AMBIENT SOUNDSCAPE)
+   -------------------------------------------------------------------------- */
+function initAudioEngine() {
+  const audioBtn = document.getElementById('audio-toggle-btn');
+  const heroVideo = document.getElementById('hero-bg-video');
+  const bgMusic = document.getElementById('bg-site-music');
+
+  let isSoundEnabled = true;
+  let currentSectionId = 'hero';
+
+  if (audioBtn) {
+    audioBtn.classList.add('playing');
+    const statusText = audioBtn.querySelector('.audio-status-text');
+    if (statusText) statusText.innerText = 'SOUND ON';
+  }
+
+  // Handle browser autoplay policy: ensure audio plays on first user interaction if blocked
+  const enableSoundGesture = () => {
+    if (isSoundEnabled) {
+      updateAudioState();
+    }
+  };
+  window.addEventListener('click', enableSoundGesture, { once: true });
+  window.addEventListener('scroll', enableSoundGesture, { once: true });
+  window.addEventListener('keydown', enableSoundGesture, { once: true });
+  window.addEventListener('pointerdown', enableSoundGesture, { once: true });
+
+  // Precise Song Trim & Loop Handler: 10s to 1m 16s (76 seconds)
+  const SONG_START_TIME = 10;
+  const SONG_END_TIME = 76;
+
+  if (bgMusic) {
+    bgMusic.addEventListener('timeupdate', () => {
+      if (bgMusic.currentTime < SONG_START_TIME) {
+        bgMusic.currentTime = SONG_START_TIME;
+      }
+      if (bgMusic.currentTime >= SONG_END_TIME) {
+        bgMusic.currentTime = SONG_START_TIME;
+        if (isSoundEnabled && currentSectionId !== 'hero' && currentSectionId !== 'mashup' && currentSectionId !== 'legacy') {
+          safePlayBgMusic();
+        } else {
+          bgMusic.pause();
+        }
+      }
+    });
+  }
+
+  function isAnyVideoActive() {
+    const signingVideo = document.getElementById('signing-off-video');
+    const mashupVideo = document.getElementById('mashup-featured-video');
+    const swearingVideo = document.getElementById('swearing-in-video');
+
+    return currentSectionId === 'hero' || currentSectionId === 'mashup' || currentSectionId === 'legacy' ||
+           (signingVideo && !signingVideo.paused) ||
+           (mashupVideo && !mashupVideo.paused) ||
+           (swearingVideo && !swearingVideo.paused);
+  }
+
+  function safePlayBgMusic() {
+    if (!isSoundEnabled || isAnyVideoActive()) {
+      if (bgMusic) {
+        bgMusic.pause();
+        bgMusic.muted = true;
+      }
+      return;
+    }
+
+    if (bgMusic) {
+      bgMusic.muted = false;
+      if (bgMusic.currentTime < SONG_START_TIME || bgMusic.currentTime >= SONG_END_TIME) {
+        bgMusic.currentTime = SONG_START_TIME;
+      }
+      bgMusic.volume = 0.65;
+      bgMusic.play().catch(() => {});
+    }
+  }
+
+  function updateAudioState() {
+    if (!isSoundEnabled) {
+      if (heroVideo) heroVideo.muted = true;
+      if (bgMusic) {
+        bgMusic.pause();
+        bgMusic.muted = true;
+      }
+      return;
+    }
+
+    if (currentSectionId === 'hero') {
+      if (heroVideo) {
+        heroVideo.play().catch(() => {});
+        heroVideo.muted = !isSoundEnabled;
+        heroVideo.volume = 0.85;
+      }
+      if (bgMusic) {
+        bgMusic.pause();
+        bgMusic.muted = true;
+      }
+    } else if (isAnyVideoActive()) {
+      if (heroVideo) heroVideo.muted = true;
+      if (bgMusic) {
+        bgMusic.pause();
+        bgMusic.muted = true;
+      }
+    } else {
+      if (heroVideo) heroVideo.muted = true;
+      safePlayBgMusic();
+    }
+  }
+
+  // Section Observer for scroll audio transitions
+  const sections = document.querySelectorAll('section[id]');
+  if (sections.length > 0) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          currentSectionId = entry.target.id;
+          updateAudioState();
+        }
+      });
+    }, { threshold: 0.1 });
+
+    sections.forEach((section) => observer.observe(section));
+  }
+
+  // Active Scroll Trigger to ensure background music plays ONLY when no video is active
+  window.addEventListener('scroll', () => {
+    if (!isSoundEnabled) return;
+    const heroEl = document.getElementById('hero');
+    const heroHeight = heroEl ? heroEl.offsetHeight : 600;
+    if (window.scrollY > heroHeight * 0.4) {
+      if (!isAnyVideoActive()) {
+        safePlayBgMusic();
+      } else if (bgMusic) {
+        bgMusic.pause();
+        bgMusic.muted = true;
+      }
+    }
+  });
+
+  // Navbar Audio Toggle
+  if (audioBtn) {
+    audioBtn.addEventListener('click', () => {
+      isSoundEnabled = !isSoundEnabled;
+      if (isSoundEnabled) {
+        audioBtn.classList.add('playing');
+        audioBtn.querySelector('.audio-status-text').innerText = 'SOUND ON';
+      } else {
+        audioBtn.classList.remove('playing');
+        audioBtn.querySelector('.audio-status-text').innerText = 'SOUND OFF';
+      }
+      updateAudioState();
+    });
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. RENDER 69 MOVIES COLLECTION
+   -------------------------------------------------------------------------- */
+function renderFilms(filmsList) {
+  const container = document.getElementById('films-grid-container');
+  if (!container) return;
+
+  container.innerHTML = '';
+
+  if (!filmsList || filmsList.length === 0) {
+    container.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding:3rem; color:var(--text-muted);">No films found.</div>`;
+    return;
+  }
+
+  filmsList.forEach((film) => {
+    const card = document.createElement('div');
+    card.className = `film-card ${film.highlight ? 'highlight-card' : ''}`;
+    card.setAttribute('data-id', film.id);
+
+    const posterHtml = film.poster 
+      ? `<div class="film-poster-container"><img src="${film.poster}" alt="${film.title} Poster" loading="lazy"></div>`
+      : `<div class="film-poster-placeholder"><span>🎬</span></div>`;
+
+    card.innerHTML = `
+      ${posterHtml}
+      <div class="film-card-body">
+        <div class="film-card-header">
+          <span class="film-number">#${film.id}</span>
+          <span class="film-year">${film.year}</span>
+          <span class="film-verdict-badge">${film.verdict}</span>
+        </div>
+        <h3 class="film-title">${film.title}</h3>
+        <p class="film-meta"><strong>Dir:</strong> ${film.director}</p>
+        <div class="film-card-footer">
+          ${film.boxoffice ? `<div class="film-boxoffice">${film.boxoffice}</div>` : `<div class="film-note-short">${film.verdict}</div>`}
+          <div class="film-expand-hint">Details →</div>
+        </div>
+      </div>
+    `;
+
+    card.addEventListener('click', () => openFilmModal(film));
+    container.appendChild(card);
+  });
+}
+
+function initFilmFilters() {
+  const filterBtns = document.querySelectorAll('.film-filter-btn');
+  if (!filterBtns.length) return;
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.getAttribute('data-filter');
+      const allFilms = window.THALAPATHY_DATA.films;
+      let filtered = allFilms;
+
+      if (filter === 'blockbusters') {
+        filtered = allFilms.filter(f => 
+          f.verdict.toLowerCase().includes('blockbuster') || 
+          f.verdict.toLowerCase().includes('hit') ||
+          f.highlight === true
+        );
+      } else if (filter === '1990s' || filter === '2000s' || filter === '2010s' || filter === '2020s') {
+        filtered = allFilms.filter(f => f.decade === filter);
+      }
+
+      renderFilms(filtered);
+    });
+  });
+}
+
+/* --------------------------------------------------------------------------
+   5. FILM DETAIL MODAL
+   -------------------------------------------------------------------------- */
+function openFilmModal(film) {
+  const modal = document.getElementById('film-modal-overlay');
+  if (!modal) return;
+
+  const posterImg = document.getElementById('modal-film-poster');
+  if (posterImg) {
+    posterImg.src = film.poster || 'assets/images/hero.jpg';
+    posterImg.alt = film.title;
+  }
+
+  document.getElementById('modal-film-title').innerText = film.title;
+  document.getElementById('modal-film-year').innerText = `${film.year} • ${film.decade}`;
+  document.getElementById('modal-film-director').innerText = film.director;
+  document.getElementById('modal-film-music').innerText = film.music || 'Original Score';
+  document.getElementById('modal-film-verdict').innerText = film.verdict;
+  document.getElementById('modal-film-boxoffice').innerText = film.boxoffice || 'Classic Release';
+  document.getElementById('modal-film-note').innerText = film.note || 'Iconic theatrical release in Thalapathy Vijay\'s 69-film landmark career.';
+
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function initModalHandlers() {
+  const modals = document.querySelectorAll('.modal-overlay');
+  modals.forEach((modal) => {
+    const closeBtn = modal.querySelector('.modal-close-btn');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+
+        // Stop video iframe if present
+        const iframe = modal.querySelector('iframe');
+        if (iframe) iframe.src = '';
+      });
+    }
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+
+        const iframe = modal.querySelector('iframe');
+        if (iframe) iframe.src = '';
+      }
+    });
+  });
+}
+
+/* --------------------------------------------------------------------------
+   6. RENDER AUDIO LAUNCH EVENTS
+   -------------------------------------------------------------------------- */
+function renderAudioLaunches(launches) {
+  const container = document.getElementById('audio-launches-container');
+  if (!container) return;
+
+  container.innerHTML = '';
+
+  launches.forEach((event) => {
+    const card = document.createElement('div');
+    card.className = 'glass-panel launch-card';
+
+    const posterSrc = event.image || 'assets/images/stadium.jpg';
+    const watchUrl = event.externalUrl || (event.youtubeId ? `https://www.youtube.com/watch?v=${event.youtubeId}` : '#');
+    const isExternal = !!event.externalUrl && !event.youtubeId;
+    const btnText = isExternal ? `WATCH ON ${event.platform || 'ZEE5'} ↗` : `PLAY VIDEO ▶`;
+
+    card.innerHTML = `
+      <div class="launch-thumbnail-box" style="cursor:pointer;">
+        <img src="${posterSrc}" alt="${event.title}" onerror="this.onerror=null; this.src='assets/images/stadium.jpg';">
+      </div>
+      <div>
+        <span class="launch-badge">${event.badge}</span>
+        <h3 class="launch-title">${event.title}</h3>
+        <div class="launch-meta-row">
+          <span>📅 ${event.date}</span>
+          <span>📍 ${event.venue}</span>
+          <span>👥 ${event.attendance}</span>
+        </div>
+        <p class="launch-desc">${event.description}</p>
+        <div style="margin-top: 1.25rem;">
+          <a href="${watchUrl}" target="_blank" rel="noopener noreferrer" class="btn-magnetic launch-watch-btn" style="padding: 0.6rem 1.5rem; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+            ${btnText}
+          </a>
+        </div>
+      </div>
+    `;
+
+    const thumb = card.querySelector('.launch-thumbnail-box');
+    const watchBtn = card.querySelector('.launch-watch-btn');
+
+    const launchVideo = () => {
+      if (watchUrl && watchUrl !== '#') {
+        window.open(watchUrl, '_blank', 'noopener,noreferrer');
+      }
+    };
+
+    thumb.addEventListener('click', launchVideo);
+    if (watchBtn) {
+      watchBtn.addEventListener('click', launchVideo);
+    }
+
+    container.appendChild(card);
+  });
+}
+
+function openVideoModal(title, youtubeId) {
+  const modal = document.getElementById('video-modal-overlay');
+  if (!modal) return;
+
+  const iframe = document.getElementById('video-modal-iframe');
+  const modalTitle = document.getElementById('video-modal-title');
+  if (modalTitle) modalTitle.innerText = title;
+
+  // Pause background site music while video modal is playing
+  const bgMusic = document.getElementById('bg-site-music');
+  if (bgMusic) bgMusic.pause();
+
+  // Set embed URL for direct in-site video playback
+  iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0&playsinline=1`;
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+/* --------------------------------------------------------------------------
+   7. RENDER AWARDS & ACHIEVEMENTS
+   -------------------------------------------------------------------------- */
+function renderAwards(awards) {
+  const container = document.getElementById('awards-grid-container');
+  if (!container) return;
+
+  container.innerHTML = '';
+
+  awards.forEach((item) => {
+    const card = document.createElement('div');
+    card.className = 'glass-panel award-card';
+
+    const imageHtml = item.image 
+      ? `<div class="award-image-box">
+           <img src="${item.image}" alt="${item.title}" onerror="this.onerror=null; this.parentNode.innerHTML='<div class=\\'award-icon-placeholder\\'>🏆</div>';">
+         </div>`
+      : `<div class="award-icon-placeholder">🏆</div>`;
+
+    const yearBadge = item.year ? `<span class="award-year-tag">${item.year}</span>` : '';
+
+    card.innerHTML = `
+      ${imageHtml}
+      <div class="award-card-content">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+          <span class="award-header-badge">${item.category}</span>
+          ${yearBadge}
+        </div>
+        <h3 class="award-title">${item.title}</h3>
+        <div class="award-film">🎬 ${item.film}</div>
+        <p class="award-note-desc" style="font-size:0.88rem; color:var(--text-secondary); margin-bottom:0.75rem; line-height:1.5;">${item.note || ''}</p>
+        <div class="award-org">🏛️ ${item.organization}</div>
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+/* --------------------------------------------------------------------------
+   8. RENDER POLITICAL TIMELINE
+   -------------------------------------------------------------------------- */
+function renderPoliticalTimeline(timeline) {
+  const container = document.getElementById('political-timeline-container');
+  if (!container) return;
+
+  container.innerHTML = '';
+
+  timeline.forEach((item, index) => {
+    const isTextLeft = index % 2 === 0;
+    const row = document.createElement('div');
+    row.className = `timeline-row ${isTextLeft ? 'text-left' : 'text-right'}`;
+
+    const isVideo = item.mediaType === 'video' || (item.mediaUrl && item.mediaUrl.endsWith('.mp4'));
+
+    const mediaHtml = isVideo ? `
+      <div class="glass-panel timeline-media-box">
+        <video id="swearing-in-video" loop muted playsinline controls style="width:100%; height:100%; object-fit:cover;">
+          <source src="${item.mediaUrl}" type="video/mp4">
+        </video>
+        <div class="timeline-video-overlay">
+          <span class="timeline-video-badge">▶ Swearing-in Milestone Video (${item.year})</span>
+        </div>
+      </div>
+    ` : `
+      <div class="glass-panel timeline-media-box">
+        <img src="${item.mediaUrl}" alt="${item.title}">
+        <div class="timeline-video-overlay">
+          <span class="timeline-video-badge">📷 Milestone Photo (${item.year})</span>
+        </div>
+      </div>
+    `;
+
+    const cardHtml = `
+      <div class="glass-panel timeline-card">
+        <div class="timeline-year">${item.year}</div>
+        <h3 class="timeline-title">${item.title}</h3>
+        <p class="timeline-desc">${item.description}</p>
+      </div>
+    `;
+
+    row.innerHTML = `
+      <div class="timeline-node"></div>
+      <div class="timeline-col col-left">
+        ${isTextLeft ? cardHtml : mediaHtml}
+      </div>
+      <div class="timeline-col col-right">
+        ${isTextLeft ? mediaHtml : cardHtml}
+      </div>
+    `;
+
+    container.appendChild(row);
+  });
+
+  // Scroll Observer for Swearing-in Video (Plays with VIDEO AUDIO ON when scrolled into view, background site music STOPPED)
+  const swearingVideo = document.getElementById('swearing-in-video');
+  if (swearingVideo) {
+    const videoObserver = new IntersectionObserver((entries) => {
+      const bgMusic = document.getElementById('bg-site-music');
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Stop background site music & unmute Swearing-in video sound!
+          if (bgMusic) bgMusic.pause();
+          swearingVideo.muted = false;
+          swearingVideo.volume = 1.0;
+          swearingVideo.play().catch(() => {});
+        } else {
+          // Pause video & resume background site music if sound is enabled
+          swearingVideo.pause();
+          swearingVideo.muted = true;
+          const audioBtn = document.getElementById('audio-toggle-btn');
+          const isSoundEnabled = audioBtn && audioBtn.classList.contains('playing');
+          if (isSoundEnabled && bgMusic) {
+            bgMusic.play().catch(() => {});
+          }
+        }
+      });
+    }, { threshold: 0.25 });
+
+    videoObserver.observe(swearingVideo);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   9. RENDER FAN MARQUEE
+   -------------------------------------------------------------------------- */
+function renderFanMarquee(quotes) {
+  const container = document.getElementById('fan-marquee-content');
+  if (!container) return;
+
+  // Duplicate quotes array to create seamless loop
+  const list = [...quotes, ...quotes, ...quotes];
+  container.innerHTML = '';
+
+  list.forEach((item) => {
+    const card = document.createElement('div');
+    card.className = 'glass-panel fan-card';
+
+    card.innerHTML = `
+      <p class="fan-text">"${item.text}"</p>
+      <div class="fan-author">${item.author}</div>
+      <div class="fan-location">${item.location}</div>
+    `;
+
+    container.appendChild(card);
+  });
+
+  // Submit Tribute Form Handler
+  const submitBtn = document.getElementById('submit-tribute-btn');
+  if (submitBtn) {
+    submitBtn.addEventListener('click', () => {
+      const name = document.getElementById('tribute-name').value.trim();
+      const city = document.getElementById('tribute-city').value.trim();
+      const msg = document.getElementById('tribute-msg').value.trim();
+
+      if (!name || !msg) {
+        alert('Please enter your name and tribute message.');
+        return;
+      }
+
+      // Append new tribute to marquee
+      const newCard = document.createElement('div');
+      newCard.className = 'glass-panel fan-card';
+      newCard.innerHTML = `
+        <p class="fan-text">"${msg}"</p>
+        <div class="fan-author">${name}</div>
+        <div class="fan-location">${city || 'Global Fan'}</div>
+      `;
+      container.prepend(newCard);
+
+      document.getElementById('tribute-name').value = '';
+      document.getElementById('tribute-city').value = '';
+      document.getElementById('tribute-msg').value = '';
+
+      const modal = document.getElementById('tribute-modal-overlay');
+      if (modal) modal.classList.remove('active');
+      alert('Thank you! Your tribute has been added to the monument fan wall.');
+    });
+  }
+
+  const openTributeModalBtn = document.getElementById('open-tribute-modal-btn');
+  if (openTributeModalBtn) {
+    openTributeModalBtn.addEventListener('click', () => {
+      const modal = document.getElementById('tribute-modal-overlay');
+      if (modal) modal.classList.add('active');
+    });
+  }
+}
+
+/* --------------------------------------------------------------------------
+   10. RENDER MASHUP VIDEO VAULT
+   -------------------------------------------------------------------------- */
+function renderMashups(mashupList) {
+  const container = document.getElementById('mashup-grid-container');
+  if (!container || !mashupList || !mashupList.length) return;
+
+  const item = mashupList[0];
+  container.innerHTML = `
+    <div class="glass-panel single-mashup-container">
+      <div class="single-mashup-video-box">
+        <video id="mashup-featured-video" loop muted playsinline poster="${item.poster || 'assets/images/legacy.jpg'}" onerror="this.style.display='none'; document.getElementById('mashup-fallback').style.display='flex';">
+          <source src="${item.video}" type="video/mp4">
+        </video>
+        <div id="mashup-fallback" class="single-mashup-fallback" style="display:none;">
+          <div class="fallback-content">
+            <span class="fallback-icon">🎬</span>
+            <h3>Add Your Mashup Video</h3>
+            <p>Save your video file as <code>assets/video/mashup.mp4</code></p>
+          </div>
+        </div>
+        <div class="single-mashup-badge">${item.badge}</div>
+        <div class="single-mashup-controls">
+          <button id="mashup-sound-btn" class="mashup-ctrl-btn">🔊 Unmute Audio</button>
+        </div>
+      </div>
+      <div class="single-mashup-info">
+        <h3 class="single-mashup-title">${item.title}</h3>
+        <p class="single-mashup-subtitle">${item.subtitle}</p>
+      </div>
+    </div>
+  `;
+
+  const video = document.getElementById('mashup-featured-video');
+  const soundBtn = document.getElementById('mashup-sound-btn');
+
+  if (video) {
+    if (soundBtn) {
+      soundBtn.addEventListener('click', () => {
+        if (video.muted) {
+          video.muted = false;
+          soundBtn.innerHTML = '🔇 Mute Audio';
+        } else {
+          video.muted = true;
+          soundBtn.innerHTML = '🔊 Unmute Audio';
+        }
+      });
+    }
+
+    // Scroll Observer for Mashup Video (Plays with SOUND ON when scrolled into view, background site music STOPPED)
+    const mashupObserver = new IntersectionObserver((entries) => {
+      const bgMusic = document.getElementById('bg-site-music');
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          if (bgMusic) bgMusic.pause();
+          video.muted = false;
+          video.volume = 1.0;
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+          video.muted = true;
+          const audioBtn = document.getElementById('audio-toggle-btn');
+          const isSoundEnabled = audioBtn && audioBtn.classList.contains('playing');
+          if (isSoundEnabled && bgMusic) {
+            bgMusic.play().catch(() => {});
+          }
+        }
+      });
+    }, { threshold: 0.25 });
+
+    mashupObserver.observe(video);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   11. SIGNING OFF VIDEO CONTROLLER
+   -------------------------------------------------------------------------- */
+function initSigningOffVideo() {
+  const video = document.getElementById('signing-off-video');
+  const soundBtn = document.getElementById('signing-off-sound-btn');
+  if (!video) return;
+
+  if (soundBtn) {
+    soundBtn.addEventListener('click', () => {
+      if (video.muted) {
+        video.muted = false;
+        soundBtn.innerHTML = '🔇 Mute Audio';
+      } else {
+        video.muted = true;
+        soundBtn.innerHTML = '🔊 Unmute Audio';
+      }
+    });
+  }
+
+  video.addEventListener('play', () => {
+    const bgMusic = document.getElementById('bg-site-music');
+    if (bgMusic) bgMusic.pause();
+  });
+
+  video.addEventListener('playing', () => {
+    const bgMusic = document.getElementById('bg-site-music');
+    if (bgMusic) bgMusic.pause();
+  });
+
+  // Scroll Observer for Signing Off Video (Plays with SOUND ON when scrolled into view, background site music STOPPED)
+  const videoObserver = new IntersectionObserver((entries) => {
+    const bgMusic = document.getElementById('bg-site-music');
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        if (bgMusic) bgMusic.pause();
+        video.muted = false;
+        video.volume = 1.0;
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+        video.muted = true;
+        const audioBtn = document.getElementById('audio-toggle-btn');
+        const isSoundEnabled = audioBtn && audioBtn.classList.contains('playing');
+        if (isSoundEnabled && bgMusic && window.location.hash !== '#legacy') {
+          bgMusic.play().catch(() => {});
+        }
+      }
+    });
+  }, { threshold: 0.25 });
+
+  videoObserver.observe(video);
+}
+
+  </script>
+
+</body>
+</html>
